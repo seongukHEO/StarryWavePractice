@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "334667948732",
+    "project_id": "starrywavemvp",
+    "storage_bucket": "starrywavemvp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334667948732:android:ab6c1fa605c96dcb7e26b9",
+        "android_client_info": {
+          "package_name": "com.example.starrywave_practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtLozpZfM6vbiCnDO3q4mLDxCSDZ1dXao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
