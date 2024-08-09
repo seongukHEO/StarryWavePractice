@@ -26,6 +26,21 @@ class _HomeScreenState extends State<HomeScreem> {
           MyPageWidget()
         ],
       ),
+      floatingActionButton: switch(_bottomIndex){
+        0 => FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: (){},
+          child: Icon(Icons.add_circle),
+        ),
+
+        1 => FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: (){},
+          child: Icon(Icons.add_circle),
+        ),
+
+      _ => Container(),
+      },
       bottomNavigationBar: NavigationBar(
         selectedIndex: _bottomIndex,
         onDestinationSelected: (idx){
