@@ -26,33 +26,26 @@ class _JobGridState extends State<JobGrid> {
             color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(15)
           ),
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("CTO 기술경영\n과제 제출", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+              Text("CTO 기술경영\n과제 제출", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Container(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // 버튼 클릭 시 동작
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey.shade400, // 배경색 설정
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30), // 모서리 반경 설정
-                          ),
-                        ),
-                        child: Text(
-                          "집중",
-                          style: TextStyle(color: Colors.grey.shade700),
-                        ),
-                      ),
-                      width: 80,
+                      width: 35,
                       height: 20,
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade400,
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Text("집중", style: TextStyle(fontSize: 10, color: Colors.grey.shade700),)),
                     ),
                     IconButton(
                         onPressed: (){},
