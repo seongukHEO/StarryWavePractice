@@ -25,8 +25,9 @@ class _TodayTodoWidgetState extends State<TodayTodoWidget> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("2024년 7월", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                    SizedBox(height: 100,),
+                    Text("2024년 8월 10일", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    Text("출발! 빨리 끝내고 쉬어요"),
+                    SizedBox(height: 70,),
                     Text("지금! 당장 바로 해야하는\n3가지를 아래에서 골라 보세요!", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
                     SizedBox(height: 10,),
                     NowGoingList(),
