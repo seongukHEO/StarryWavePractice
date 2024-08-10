@@ -14,7 +14,7 @@ class _TodayTodoListState extends State<TodayTodoList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 245,
       child: ReorderableListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,

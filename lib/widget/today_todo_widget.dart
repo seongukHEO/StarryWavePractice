@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:starrywave_practice/common/now_going_list.dart';
+import 'package:starrywave_practice/common/today_end_job_list.dart';
 import 'package:starrywave_practice/common/today_todo_list.dart';
 
 class TodayTodoWidget extends StatefulWidget {
@@ -35,7 +36,7 @@ class _TodayTodoWidgetState extends State<TodayTodoWidget> {
               SizedBox(height: 30,),
               Container(
                 padding: EdgeInsets.all(18),
-                height: 1000,
+                height: 860,
                 width: double.infinity,
                 color: Colors.grey,
                 child: Column(
@@ -43,19 +44,36 @@ class _TodayTodoWidgetState extends State<TodayTodoWidget> {
                   children: [
                     Text("오늘 할 일", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
                     Text("우선순위 파악이 가능하다면 순서대로 정리해보세요", style: TextStyle(fontSize: 12, color: Colors.grey.shade800),),
+                    SizedBox(height: 20,),
+                    TodayTodoList(),
+                    Divider(height: 1, color: Colors.grey.shade700,),
                     SizedBox(height: 10,),
                     TodayTodoList(),
                     Divider(height: 1, color: Colors.grey.shade700,),
+                    SizedBox(height: 10,),
                     TodayTodoList(),
-                    Divider(height: 1, color: Colors.grey.shade700,),
-                    TodayTodoList(),
-                    Divider(height: 1, color: Colors.grey.shade700,),
+
 
                   ],
                 ),
               ),
               SizedBox(height: 30,),
-              Text("끝")
+              Container(
+                padding: EdgeInsets.all(18),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("완료한 일", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                        Text("2개"),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    TodayEndJobList()
+                  ],
+                ),
+              )
             ],
           ),
         ),
