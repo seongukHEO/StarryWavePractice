@@ -44,7 +44,12 @@ class _TodayTodoWidgetState extends State<TodayTodoWidget> {
                     Text("오늘 할 일", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
                     Text("우선순위 파악이 가능하다면 순서대로 정리해보세요", style: TextStyle(fontSize: 12, color: Colors.grey.shade800),),
                     SizedBox(height: 10,),
-                    TodayTodoList()
+                    TodayTodoList(),
+                    Divider(height: 1, color: Colors.grey.shade700,),
+                    TodayTodoList(),
+                    Divider(height: 1, color: Colors.grey.shade700,),
+                    TodayTodoList(),
+                    Divider(height: 1, color: Colors.grey.shade700,),
 
                   ],
                 ),

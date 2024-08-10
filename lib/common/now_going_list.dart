@@ -16,6 +16,8 @@ class _NowGoingListState extends State<NowGoingList> {
     return Container(
       height: 300,
       child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
           itemCount: 3,
           itemBuilder: (context, index){
             return Container(

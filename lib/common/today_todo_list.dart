@@ -14,8 +14,10 @@ class _TodayTodoListState extends State<TodayTodoList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 250,
       child: ReorderableListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
         itemCount: items.length,
         onReorder: (int oldIndex, int newIndex) {
           setState(() {
@@ -29,52 +31,55 @@ class _TodayTodoListState extends State<TodayTodoList> {
         itemBuilder: (context, index) {
           return Container(
             key: ValueKey(items[index]), // 고유 키 설정
-            margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${items[index]}",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                        width: 35,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade400,
-                          borderRadius: BorderRadius.circular(10),
+            // margin을 padding으로 변경합니다.
+            padding: EdgeInsets.symmetric(vertical: 4), // 위아래 패딩을 추가하여 간격 유지
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${items[index]}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "집중",
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: Colors.grey.shade700,
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                          width: 35,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade400,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "집중",
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.grey.shade700,
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.play_circle_filled_rounded),
+                  Container(
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.drag_handle),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
@@ -82,3 +87,6 @@ class _TodayTodoListState extends State<TodayTodoList> {
     );
   }
 }
+
+
+
