@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:starrywave_practice/widget/addJob/second_job_widget.dart';
 
 class FirstJobWidget extends StatefulWidget {
   const FirstJobWidget({super.key});
@@ -56,7 +57,7 @@ class _FirstJobWidgetState extends State<FirstJobWidget> {
 
                           });
                         },
-                        child: Text("다음", style: TextStyle(color: Colors.white, fontSize: 16),),
+                        child: Text("다음", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
                         color: Colors.black,
                         shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
