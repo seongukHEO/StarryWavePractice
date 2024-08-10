@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:starrywave_practice/widget/addJob/first_job_widget.dart';
+import 'package:starrywave_practice/widget/addJob/second_job_widget.dart';
+import 'package:starrywave_practice/widget/addJob/third_job_widget.dart';
 
 class AddJobScreen extends StatefulWidget {
   const AddJobScreen({super.key});
@@ -60,9 +63,9 @@ class _AddJobScreenState extends State<AddJobScreen> with TickerProviderStateMix
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  Container(color: Colors.red),
-                  Container(color: Colors.grey),
-                  Container(color: Colors.blue),
+                  FirstJobWidget(),
+                  SecondJobWidget(),
+                  ThirdJobWidget()
                 ],
               ),
             ),
