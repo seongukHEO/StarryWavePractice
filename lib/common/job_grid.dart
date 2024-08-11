@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:starrywave_practice/screen/modify_todo_screen.dart';
+import 'package:starrywave_practice/screen/todo_start_screen.dart';
 
 class JobGrid extends StatefulWidget {
   const JobGrid({super.key});
@@ -21,40 +23,51 @@ class _JobGridState extends State<JobGrid> {
       ),
       itemCount: 3,
       itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(15)
-          ),
-          padding: EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("CTO 기술경영\n과제 제출", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      width: 35,
-                      height: 20,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade400,
-                          borderRadius: BorderRadius.circular(10)
+        return GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return ModifyTodoScreen();
+            }));
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(15)
+            ),
+            padding: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("CTO 기술경영\n과제 제출", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: 35,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade400,
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("집중", style: TextStyle(fontSize: 10, color: Colors.grey.shade700),)),
                       ),
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text("집중", style: TextStyle(fontSize: 10, color: Colors.grey.shade700),)),
-                    ),
-                    IconButton(
-                        onPressed: (){},
-                        icon: Icon(Icons.play_circle)
-                    )
-                  ],
+                      IconButton(
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return TodoStartScreen();
+                            }));
+                          },
+                          icon: Icon(Icons.play_circle)
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

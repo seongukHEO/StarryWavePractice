@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../screen/modify_todo_screen.dart';
+import '../screen/todo_start_screen.dart';
+
 class ConditionGrid extends StatefulWidget {
   const ConditionGrid({super.key});
 
@@ -21,41 +24,52 @@ class _ConditionGridState extends State<ConditionGrid> {
       ),
       itemCount: 2,
       itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(15)
-          ),
-          padding: EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("책상 정리하기", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      width: 35,
-                      height: 20,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade400,
-                          borderRadius: BorderRadius.circular(10)
+        return GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return ModifyTodoScreen();
+            }));
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(15)
+            ),
+            padding: EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("책상 정리하기", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: 35,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade400,
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("집중", style: TextStyle(fontSize: 10, color: Colors.grey.shade700),)),
                       ),
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text("집중", style: TextStyle(fontSize: 10, color: Colors.grey.shade700),)),
-                    ),
-                    IconButton(
-                        onPressed: (){},
-                        icon: Icon(Icons.play_circle)
-                    )
-                  ],
+                      IconButton(
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return TodoStartScreen();
+                            }));
+                          },
+                          icon: Icon(Icons.play_circle)
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

@@ -127,7 +127,9 @@ class _ThirdJobWidgetState extends State<ThirdJobWidget> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide.none
                         ),
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
                         child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                       ),
                     )
