@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:starrywave_practice/common/flex_button.dart';
 
 class ThirdJobWidget extends StatefulWidget {
-  const ThirdJobWidget({super.key});
+  final TabController tabController;
+  const ThirdJobWidget({super.key, required this.tabController});
 
   @override
   State<ThirdJobWidget> createState() => _ThirdJobWidgetState();
@@ -11,7 +12,7 @@ class ThirdJobWidget extends StatefulWidget {
 
 class _ThirdJobWidgetState extends State<ThirdJobWidget> {
 
-  bool isFirstContainer = false;
+  bool isFirstContainer = true;
   bool isSecondContainer = false;
 
   void toggleButtonStyle(int buttonIndex){
@@ -93,7 +94,47 @@ class _ThirdJobWidgetState extends State<ThirdJobWidget> {
                 ),
               ],
             ),
-            FlexButton(name: "이전", name2: "추가하기")
+        Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 45,
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                    child: MaterialButton(
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)
+                      ),
+                      onPressed: (){
+                        widget.tabController.animateTo(1);
+                      },
+                      child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
+                    ),
+                  ),
+                ),
+                Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 45,
+                      width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                      child: MaterialButton(
+                        color: Colors.black,
+                        shape: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide.none
+                        ),
+                        onPressed: (){},
+                        child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                      ),
+                    )
+                )
+              ],
+            )
+        ),
           ],
         ),
       ),

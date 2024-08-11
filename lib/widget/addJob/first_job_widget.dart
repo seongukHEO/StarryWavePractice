@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:starrywave_practice/widget/addJob/second_job_widget.dart';
 
 class FirstJobWidget extends StatefulWidget {
-  const FirstJobWidget({super.key});
+  final TabController tabController;
+  const FirstJobWidget({super.key, required this.tabController});
 
   @override
   State<FirstJobWidget> createState() => _FirstJobWidgetState();
@@ -28,6 +29,7 @@ class _FirstJobWidgetState extends State<FirstJobWidget> {
             Text("해야하는 일의\n제목을 작성해주세요!", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
             SizedBox(height: 60,),
             TextFormField(
+              key: _formKey,
               decoration: InputDecoration(
                 filled: true,
                   fillColor: Colors.grey.shade300,
@@ -53,9 +55,7 @@ class _FirstJobWidgetState extends State<FirstJobWidget> {
                       height: 50,
                       child: MaterialButton(
                         onPressed: (){
-                          setState(() {
-
-                          });
+                          widget.tabController.animateTo(1);
                         },
                         child: Text("다음", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
                         color: Colors.black,

@@ -7,7 +7,8 @@ import 'package:starrywave_practice/common/flex_button.dart';
 import 'package:starrywave_practice/widget/calendar_widget.dart';
 
 class SecondJobWidget extends StatefulWidget {
-  const SecondJobWidget({super.key});
+  final TabController tabController;
+  const SecondJobWidget({super.key, required this.tabController});
 
   @override
   State<SecondJobWidget> createState() => _SecondJobWidgetState();
@@ -17,7 +18,7 @@ class _SecondJobWidgetState extends State<SecondJobWidget> {
   String calendarText = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   bool _firstContainer = false;
-  bool _calendarButton = false;
+  bool _calendarButton = true;
 
 
   void selectEvent(int Index){
@@ -113,7 +114,49 @@ class _SecondJobWidgetState extends State<SecondJobWidget> {
                 ],
               ),
             ),
-            FlexButton(name: "이전", name2: '다음',)
+        Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 45,
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                    child: MaterialButton(
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)
+                      ),
+                      onPressed: (){
+                        widget.tabController.animateTo(0);
+                      },
+                      child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
+                    ),
+                  ),
+                ),
+                Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 45,
+                      width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                      child: MaterialButton(
+                        color: Colors.black,
+                        shape: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide.none
+                        ),
+                        onPressed: (){
+                          widget.tabController.animateTo(2);
+                        },
+                        child: Text("다음", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                      ),
+                    )
+                )
+              ],
+            )
+        ),
           ],
         ),
       ),

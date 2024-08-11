@@ -63,9 +63,9 @@ class _AddJobScreenState extends State<AddJobScreen> with TickerProviderStateMix
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  FirstJobWidget(),
-                  SecondJobWidget(),
-                  ThirdJobWidget()
+                  FirstJobWidget(tabController: _tabController),
+                  SecondJobWidget(tabController: _tabController),
+                  ThirdJobWidget(tabController: _tabController)
                 ],
               ),
             ),
