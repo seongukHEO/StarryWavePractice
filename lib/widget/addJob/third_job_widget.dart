@@ -42,6 +42,9 @@ class _ThirdJobWidgetState extends State<ThirdJobWidget> {
                 ),
                 SizedBox(width: 10,),
                 GestureDetector(
+                  onTap: (){
+
+                  },
                   child: Container(
                     height: 40,
                     width: 120,

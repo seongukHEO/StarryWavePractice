@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatefulWidget {
-  final Function(DateTime selectDate) onSave;
+  final Function(String selectDate) onSave;
   const CalendarWidget({super.key, required this.onSave});
 
   @override
@@ -11,15 +12,6 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
-
-  void showSnackbar(String message){
-    var snackBar = SnackBar(
-      content: Text(message, style: TextStyle(color: Colors.black),),
-      duration: Duration(seconds: 1),
-      backgroundColor: Colors.white,
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
 
   DateTime _focusDay = DateTime.now();
   DateTime? _selectDay;
@@ -52,8 +44,16 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                       ),
                       onDaySelected: (selectDay, focusedDay){
                         setState(() {
-                          _selectDay = selectDay;
-                          _focusDay = focusedDay;
+                          _selectDay = DateTime(
+                            selectDay.year,
+                            selectDay.month,
+                            selectDay.day
+                          );
+                          _focusDay = DateTime(
+                            focusedDay.year,
+                            focusedDay.month,
+                            focusedDay.day
+                          );
                         });
                       },
                     ),
@@ -68,9 +68,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                         ),
                         TextButton(
                             onPressed: (){
-                              widget.onSave(
-                                  _selectDay ?? _focusDay
+                              String fomattedDate = DateFormat('yyyy-MM-dd').format(
+                                _selectDay ?? _focusDay
                               );
+                              widget.onSave(fomattedDate);
                               Navigator.pop(context);
                             },
                             child: Text("확인")
