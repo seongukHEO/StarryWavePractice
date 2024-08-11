@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:starrywave_practice/common/flex_button.dart';
+import 'package:starrywave_practice/widget/calendar_widget.dart';
 
 class SecondJobWidget extends StatefulWidget {
   const SecondJobWidget({super.key});
@@ -12,6 +13,22 @@ class SecondJobWidget extends StatefulWidget {
 }
 
 class _SecondJobWidgetState extends State<SecondJobWidget> {
+  String calendarText = "0000.00.00";
+
+  void _showDialog()async{
+    showDialog(
+        context: context,
+        builder: (context){
+          return CalendarWidget(onSave: (DateTime selectTime){
+            setState(() {
+              calendarText = selectTime.toString();
+              print("날짜 ${selectTime}");
+            });
+          });
+        }
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +71,10 @@ class _SecondJobWidgetState extends State<SecondJobWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("0000.00.00", style: TextStyle(color: Colors.grey),),
+                  Text("${calendarText}", style: TextStyle(color: Colors.grey),),
                   IconButton(
                       onPressed: (){
-
+                        _showDialog();
                       },
                       icon: Icon(Icons.calendar_today)
                   )
