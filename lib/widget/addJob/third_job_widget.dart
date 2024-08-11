@@ -10,6 +10,22 @@ class ThirdJobWidget extends StatefulWidget {
 }
 
 class _ThirdJobWidgetState extends State<ThirdJobWidget> {
+
+  bool isFirstContainer = false;
+  bool isSecondContainer = false;
+
+  void toggleButtonStyle(int buttonIndex){
+    setState(() {
+      if (buttonIndex == 1) {
+        isFirstContainer = true;
+        isSecondContainer = false;
+      }  else if (buttonIndex == 2) {
+        isFirstContainer = false;
+        isSecondContainer = true;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,38 +42,55 @@ class _ThirdJobWidgetState extends State<ThirdJobWidget> {
               children: [
                 GestureDetector(
                   onTap: (){
-
+                    return toggleButtonStyle(1);
                   },
                   child: Container(
                     height: 40,
                     width: 120,
                     decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 1),
                         borderRadius: BorderRadius.circular(25),
-                        color: Colors.black
+                        color: isFirstContainer ? Colors.black : Colors.white
                     ),
                     child: Align(
                         alignment: Alignment.center,
-                        child: Text("작업집중 회로", style: TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold),)),
+                        child: Text(
+                          "작업집중 회로",
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: isFirstContainer ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        )
+                    ),
                   ),
                 ),
                 SizedBox(width: 10,),
                 GestureDetector(
                   onTap: (){
-
+                    return toggleButtonStyle(2);
                   },
                   child: Container(
                     height: 40,
                     width: 120,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all()
+                        border: Border.all(color: Colors.black, width: 1),
+                        borderRadius: BorderRadius.circular(25),
+                        color: isSecondContainer ? Colors.black : Colors.white
                     ),
                     child: Align(
-                      alignment: Alignment.center,
-                      child: Text("기본상태 회로", style: TextStyle(fontSize: 13, color: Colors.grey.shade800, fontWeight: FontWeight.bold),),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "기본상태 회로",
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: isSecondContainer ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        )
                     ),
                   ),
-                )
+                ),
               ],
             ),
             FlexButton(name: "이전", name2: "추가하기")
