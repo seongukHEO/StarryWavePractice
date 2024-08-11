@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:starrywave_practice/common/now_going_list.dart';
 import 'package:starrywave_practice/common/today_end_job_list.dart';
 import 'package:starrywave_practice/common/today_todo_list.dart';
@@ -12,6 +13,8 @@ class TodayTodoWidget extends StatefulWidget {
 }
 
 class _TodayTodoWidgetState extends State<TodayTodoWidget> {
+
+  final formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +28,7 @@ class _TodayTodoWidgetState extends State<TodayTodoWidget> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("2024년 8월 10일", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    Text("${formattedDate}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                     Text("출발! 빨리 끝내고 쉬어요"),
                     SizedBox(height: 70,),
                     Text("지금! 당장 바로 해야하는\n3가지를 아래에서 골라 보세요!", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
