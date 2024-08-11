@@ -16,6 +16,22 @@ class SecondJobWidget extends StatefulWidget {
 class _SecondJobWidgetState extends State<SecondJobWidget> {
   String calendarText = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
+  bool _firstContainer = false;
+  bool _calendarButton = false;
+
+
+  void selectEvent(int Index){
+    setState(() {
+      if (Index == 1) {
+        _firstContainer = true;
+        _calendarButton = false;
+      }  else if (Index == 2) {
+        _firstContainer = false;
+        _calendarButton = true;
+      }
+    });
+  }
+
   void _showDialog()async{
     showDialog(
         context: context,
@@ -47,16 +63,28 @@ class _SecondJobWidgetState extends State<SecondJobWidget> {
               onTap: (){
 
               },
-              child: Container(
-                height: 40,
-                width: 120,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Colors.black
+              child: GestureDetector(
+                onTap: (){
+                  return selectEvent(1);
+                },
+                child: Container(
+                  height: 40,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.black),
+                    borderRadius: BorderRadius.circular(25),
+                    color: _firstContainer ? Colors.black : Colors.white
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                      child: Text("아직 모르겠어요",
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: _firstContainer ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.bold),
+                      )
+                  ),
                 ),
-                child: Align(
-                  alignment: Alignment.center,
-                    child: Text("아직 모르겠어요", style: TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold),)),
               ),
             ),
             SizedBox(height: 50,),
@@ -72,10 +100,13 @@ class _SecondJobWidgetState extends State<SecondJobWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${calendarText}", style: TextStyle(color: Colors.grey),),
+                  Text(
+                    _calendarButton ? "${calendarText}" : "",
+                    style: TextStyle(color: Colors.grey),),
                   IconButton(
                       onPressed: (){
                         _showDialog();
+                        return selectEvent(2);
                       },
                       icon: Icon(Icons.calendar_today)
                   )
