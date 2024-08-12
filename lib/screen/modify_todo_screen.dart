@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../widget/calendar_widget.dart';
 
 class ModifyTodoScreen extends StatefulWidget {
   const ModifyTodoScreen({super.key});
@@ -12,6 +15,52 @@ class _ModifyTodoScreenState extends State<ModifyTodoScreen> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController modifyController = TextEditingController();
+
+  String calendarText = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+  bool _noContainer = false;
+  bool _calendarButton = true;
+
+  bool _focusState = true;
+  bool _nomalState = false;
+
+  void whenToggle(int buttonIndex){
+    setState(() {
+      if (buttonIndex == 1) {
+        _noContainer = true;
+        _calendarButton = false;
+      }  else if (buttonIndex == 2) {
+        _noContainer = false;
+        _calendarButton = true;
+      }
+    });
+  }
+
+  void howFocus(int index){
+    setState(() {
+      if (index == 1) {
+        _focusState = true;
+        _nomalState = false;
+      }  else if (index == 2) {
+        _focusState = false;
+        _nomalState = true;
+      }
+    });
+  }
+
+  void _showDialog()async{
+    showDialog(
+        context: context,
+        builder: (context){
+          return CalendarWidget(onSave: (String selectTime){
+            setState(() {
+              calendarText = selectTime.toString();
+              print("날짜 ${selectTime}");
+            });
+          });
+        }
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,36 +101,44 @@ class _ModifyTodoScreenState extends State<ModifyTodoScreen> {
                 children: [
                   Expanded(
                     flex: 4,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(0 , 0, 10, 0),
-                      padding: EdgeInsets.all(5),
-                      height: 40,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: Colors.black, width: 1),
-                        color: Colors.white
+                    child: GestureDetector(
+                      onTap: (){
+                        return whenToggle(1);
+                    },
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0 , 0, 10, 0),
+                        padding: EdgeInsets.all(5),
+                        height: 40,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(color: Colors.black, width: 1),
+                          color: _noContainer ? Colors.black : Colors.white
+                        ),
+                        child: Align(alignment: Alignment.center,child: Text("아직 모르겠어요", style: TextStyle(color: _noContainer ? Colors.white : Colors.black),)),
                       ),
-                      child: Align(alignment: Alignment.center,child: Text("아직 모르겠어요")),
                     ),
                   ),
                   Expanded(
                     flex: 5,
                       child: Container(
                         padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                        margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                        margin: EdgeInsets.fromLTRB(1, 0, 0, 0),
                         height: 40,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
-                          color: Colors.grey.shade400
+                          color: Colors.grey.shade300
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("2024-08-12", style: TextStyle(fontWeight: FontWeight.bold),),
+                            Text(_calendarButton ? calendarText : "", style: TextStyle(fontWeight: FontWeight.bold),),
                             IconButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  _showDialog();
+                                  return whenToggle(2);
+                                },
                                 icon: Icon(Icons.calendar_today)
                             )
                           ],
@@ -95,30 +152,40 @@ class _ModifyTodoScreenState extends State<ModifyTodoScreen> {
               SizedBox(height: 20,),
               Row(
                 children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0 , 0, 10, 0),
-                    padding: EdgeInsets.all(5),
-                    height: 40,
-                    width: 110,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: Colors.black, width: 1),
-                        color: Colors.white
+                  GestureDetector(
+                    onTap: (){
+                      return howFocus(1);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(0 , 0, 10, 0),
+                      padding: EdgeInsets.all(5),
+                      height: 40,
+                      width: 110,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(color: Colors.black, width: 1),
+                          color: _focusState ? Colors.black : Colors.white
+                      ),
+                      child: Align(alignment: Alignment.center,child: Text("작업집중 회로", style: TextStyle(color: _focusState ? Colors.white : Colors.black),)),
                     ),
-                    child: Align(alignment: Alignment.center,child: Text("작업집중 회로")),
                   ),
 
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0 , 0, 10, 0),
-                    padding: EdgeInsets.all(5),
-                    height: 40,
-                    width: 110,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: Colors.black, width: 1),
-                        color: Colors.white
+                  GestureDetector(
+                    onTap: (){
+                      howFocus(2);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(0 , 0, 10, 0),
+                      padding: EdgeInsets.all(5),
+                      height: 40,
+                      width: 110,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(color: Colors.black, width: 1),
+                          color: _nomalState ? Colors.black : Colors.white
+                      ),
+                      child: Align(alignment: Alignment.center,child: Text("기본상태 회로", style: TextStyle(color: _nomalState ? Colors.white : Colors.black),)),
                     ),
-                    child: Align(alignment: Alignment.center,child: Text("기본상태 회로")),
                   ),
                 ],
               ),
