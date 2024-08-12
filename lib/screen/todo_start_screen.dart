@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:starrywave_practice/widget/startJob/first_start_job_widget.dart';
+import 'package:starrywave_practice/widget/startJob/second_start_job_widget.dart';
 
 class TodoStartScreen extends StatefulWidget {
   const TodoStartScreen({super.key});
@@ -64,8 +66,8 @@ class _TodoStartScreenState extends State<TodoStartScreen> with TickerProviderSt
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    Container(color: Colors.red,),
-                    Container(color: Colors.blue,)
+                    FirstStartJobWidget(tabController: _tabController),
+                    SecondStartJobWidget(tabController: _tabController)
                   ],
                 )
             )
