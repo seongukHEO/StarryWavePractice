@@ -24,7 +24,50 @@ class _SecondStartJobWidgetState extends State<SecondStartJobWidget> {
             SizedBox(height: 10,),
             Text("경영시험 공부하기(을)를 시작하기 위해 5분동안 할 수 있는\n아주 간단한 일은 무엇인가요?", style: TextStyle(fontSize: 12, color: Colors.grey),),
             SizedBox(height: 50,),
-            BuildChips()
+            BuildChips(),
+            Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        height: 45,
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                        child: MaterialButton(
+                          shape: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          onPressed: (){
+                            widget.tabController.animateTo(0);
+                          },
+                          child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                        flex: 3,
+                        child: Container(
+                          height: 45,
+                          width: double.infinity,
+                          margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                          child: MaterialButton(
+                            color: Colors.black,
+                            shape: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide.none
+                            ),
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                            child: Text("시작하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                          ),
+                        )
+                    )
+                  ],
+                )
+            ),
           ],
         ),
       ),

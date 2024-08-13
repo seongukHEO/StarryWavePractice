@@ -120,7 +120,7 @@ class _BuildChipsState extends State<BuildChips> {
             ),
             selected: chip["isSelected"],
             selectedColor: Colors.black,
-            backgroundColor: Colors.grey.shade300,
+            backgroundColor: Colors.grey.shade200,
             onSelected: (bool selected) {
               setState(() {
                 chip["isSelected"] = selected;
