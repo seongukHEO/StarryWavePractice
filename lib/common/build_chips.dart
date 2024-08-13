@@ -22,10 +22,10 @@ class _BuildChipsState extends State<BuildChips> {
           return AlertDialog(
             title: Align(
               alignment: Alignment.center,
-              child: Text("경영시험 공부하기의\n새 시작트리거를 추가해보세요"),
+              child: Text("경영시험 공부하기의\n새 시작트리거를 추가해보세요", style: TextStyle(fontSize: 16),),
             ),
             content: Container(
-              height: 300,
+              height: 200,
               width: 300,
               padding: EdgeInsets.all(10),
               child: Column(
@@ -46,7 +46,9 @@ class _BuildChipsState extends State<BuildChips> {
                       labelText: "시작트리거를 작성하세요!",
                     ),
                   ),
+                  SizedBox(height: 20,),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Expanded(
                         flex: 2,
@@ -78,7 +80,7 @@ class _BuildChipsState extends State<BuildChips> {
                                   borderSide: BorderSide.none
                               ),
                               onPressed: (){
-                                _addChip("kkkk");
+                                _addChip(_chipController.text);
                                 Navigator.pop(context);
                               },
                               child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
@@ -104,37 +106,43 @@ class _BuildChipsState extends State<BuildChips> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 4.0,
       children: [
-        Wrap(
-          spacing: 8.0,
-          runSpacing: 4.0,
-          children: _chips.map((chip){
-            return ChoiceChip(
-                label: Text(chip["label"], style: TextStyle(color: chip["isSelected"] ? Colors.white : Colors.black),),
-                selected: chip["isSelected"],
-              selectedColor: Colors.black,
-              backgroundColor: Colors.grey,
-              onSelected: (bool selected){
-                  setState(() {
-                    chip["isSelected"] = selected;
-                  });
-              },
-            );
-          }).toList()
-        ),
+        ..._chips.map((chip) {
+          return ChoiceChip(
+            label: Text(
+              chip["label"],
+              style: TextStyle(
+                color: chip["isSelected"] ? Colors.white : Colors.black,
+              ),
+            ),
+            selected: chip["isSelected"],
+            selectedColor: Colors.black,
+            backgroundColor: Colors.grey.shade300,
+            onSelected: (bool selected) {
+              setState(() {
+                chip["isSelected"] = selected;
+              });
+            },
+          );
+        }).toList(),
         GestureDetector(
-          onTap: (){
+          onTap: () {
             _showDialog();
           },
           child: Chip(
-            label: Text("+ 직접 추가하기", style: TextStyle(color: Colors.blueAccent.shade700),),
+            label: Text(
+              "+ 직접 추가하기",
+              style: TextStyle(color: Colors.blueAccent.shade700),
+            ),
             backgroundColor: Colors.blue.shade100,
             elevation: 6.0,
             shadowColor: Colors.grey[60],
             padding: EdgeInsets.all(8),
           ),
-        )
+        ),
       ],
     );
   }
