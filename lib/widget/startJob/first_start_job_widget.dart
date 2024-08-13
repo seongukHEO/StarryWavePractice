@@ -106,48 +106,27 @@ class _FirstStartJobWidgetState extends State<FirstStartJobWidget> {
               ],
             ),
             Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        height: 45,
+                    Container(
                         width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                        height: 50,
                         child: MaterialButton(
-                          shape: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15)
-                          ),
                           onPressed: (){
-                            Navigator.pop(context);
+                            widget.tabController.animateTo(1);
                           },
-                          child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                        flex: 3,
-                        child: Container(
-                          height: 45,
-                          width: double.infinity,
-                          margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
-                          child: MaterialButton(
-                            color: Colors.black,
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide.none
-                            ),
-                            onPressed: (){
-                              widget.tabController.animateTo(1);
-                            },
-                            child: Text("다음", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                          child: Text("다음", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+                          color: Colors.black,
+                          shape: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide.none
                           ),
                         )
                     )
                   ],
                 )
-            ),
+            )
           ],
         ),
       ),
