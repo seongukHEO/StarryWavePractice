@@ -24,14 +24,7 @@ class _SecondStartJobWidgetState extends State<SecondStartJobWidget> {
             SizedBox(height: 10,),
             Text("경영시험 공부하기(을)를 시작하기 위해 5분동안 할 수 있는\n아주 간단한 일은 무엇인가요?", style: TextStyle(fontSize: 12, color: Colors.grey),),
             SizedBox(height: 50,),
-            GestureDetector(
-              onTap: (){
-                print("gghghghg");
-              },
-                child: BuildChips(label: "dkdk", color: Colors.black)
-            ),
-            SizedBox(height: 40,),
-            Text("생각나는 일이 있다면 추가해보세요.", style: TextStyle(fontWeight: FontWeight.bold),)
+            BuildChips()
           ],
         ),
       ),
