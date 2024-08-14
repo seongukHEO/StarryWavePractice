@@ -11,38 +11,50 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin {
-   late AnimationController controller;
-  late Animation<Color?> _colorTween;
-
+  
+  static const maxSecond = 1500; //25분
+  int remainingSecond = maxSecond;  // 남은 시간
+  Timer? _timer;
   bool isRunning = false;
-
-  int totalSeconds = 1500;
-  
-  late Timer timer;
-  
-
-  
-  @override
-  void initState() {
-    // TODO: implement initState
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 10),
-    );
-    //   ..addListener((){
-    //   setState(() {
-    //   });
-    // });
-    _colorTween = controller.drive(ColorTween(begin: Colors.cyanAccent, end: Colors.cyanAccent));
-    controller.forward();
-    super.initState();
-  }
 
   @override
   void dispose() {
     // TODO: implement dispose
+    _timer?.cancel();
     super.dispose();
-    controller.dispose();
+  }
+  
+  void startTimer(){
+    _timer = Timer.periodic(Duration(seconds: 1), (timer){
+      setState(() {
+        if (remainingSecond > 0) {
+          remainingSecond--;  //남은 시간을 1초씩 줄인다
+        }  
+        else{
+          _timer?.cancel();  //시간이 0이되면 타이머 중지
+        }
+      });
+    });
+  }
+  
+  void toggleTimer(){
+    if (isRunning) {
+      //타이머를 일시 정지
+      _timer?.cancel();
+    }  else{
+      //재시작
+      startTimer();
+    }
+    setState(() {
+      isRunning = !isRunning;
+    });
+  }
+  
+  //시간 변환
+  String formatTime(int seconds){
+    int minutes = seconds ~/ 60;
+    int sec = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${sec.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -69,10 +81,10 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                       fit: StackFit.expand,
                       children: [
                         CircularProgressIndicator(
-                          backgroundColor: Colors.white,
+                          backgroundColor: Colors.cyanAccent,
                           strokeWidth: 20,
-                          value: controller.value,
-                          valueColor: _colorTween,
+                          value: remainingSecond / maxSecond , //점점 줄어들게끔 구현
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                         ),
                         Center(
                           child: Column(
@@ -80,11 +92,11 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                             children: [
                               Text("남은 시간", style: TextStyle(fontSize: 20),),
                               Text(
-                                (controller.value * 100).toInt().toString(),
+                                formatTime(remainingSecond),
                                 style: TextStyle(fontSize: 50, color: Colors.lightGreenAccent),
                               ),
                               IconButton(
-                                  onPressed: (){},
+                                  onPressed: toggleTimer,
                                   iconSize: 60,
                                   icon: Icon(
                                     isRunning
