@@ -60,7 +60,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade800,
+      backgroundColor: Colors.black12,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(20),
