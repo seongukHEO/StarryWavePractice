@@ -126,17 +126,37 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
               ),
               SizedBox(height: 10,),
               Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    color: Colors.white12,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        children: [
-                          Text("5분간 시작트리거부터 완료해보아요", style: TextStyle(color: Colors.white),),
-                          SizedBox(height: 10,),
-                          TriggerList(),
-                        ],
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      color: Colors.white12,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("5분간 시작트리거부터 완료해보아요", style: TextStyle(color: Colors.grey, fontSize: 12),),
+                            SizedBox(height: 10,),
+                            TriggerList(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconButton(
+                                    onPressed: (){
+
+                                    },
+                                    icon: Icon(Icons.add_circle_outline),
+                                  iconSize: 30,
+                                ),
+                                IconButton(
+                                    onPressed: (){},
+                                    icon: Icon(Icons.add_box),
+                                  iconSize: 30,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )
