@@ -20,6 +20,9 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
 
   int fomodoro = 0;
 
+  TextEditingController _taskController = TextEditingController();
+
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -52,6 +55,95 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
     setState(() {
       isRunning = !isRunning;
     });
+  }
+
+  void _showDialog()async{
+    showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            title: Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: 200,
+                width: 300,
+                child: Column(
+                  children: [
+                    Text("경영시험 공부하기의", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    Text("하위 테스크를 추가해보세요", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    SizedBox(height: 20,),
+                    TextField(
+                      controller: _taskController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey.shade300,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(15)
+                        ),
+                        labelText: "하위테스크의 이름을 작성해보세요",
+                        labelStyle: TextStyle(fontSize: 12)
+                      ),
+                    ),
+                    Text("* 20자 이내로 작성해주세요", style: TextStyle(fontSize: 10, color: Colors.grey),),
+                    Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            height: 45,
+                            width: double.infinity,
+                            margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                            child: MaterialButton(
+                              shape: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                              child: Text("취소", style: TextStyle(fontWeight: FontWeight.bold),),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            flex: 3,
+                            child: Container(
+                              height: 45,
+                              width: double.infinity,
+                              margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                              child: MaterialButton(
+                                color: Colors.black,
+                                shape: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide.none
+                                ),
+                                onPressed: (){
+                                  if (_taskController.text.isNotEmpty) {
+                                    Navigator.pop(context);
+                                  }  else{
+
+                                  }
+                                },
+                                child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                              ),
+                            )
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ),
+          );
+        }
+    );
   }
   
   //시간 변환
@@ -149,7 +241,9 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                                   iconSize: 30,
                                 ),
                                 IconButton(
-                                    onPressed: (){},
+                                    onPressed: (){
+                                      _showDialog();
+                                    },
                                     icon: Icon(Icons.add_box),
                                   iconSize: 30,
                                 )

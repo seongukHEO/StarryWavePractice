@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +39,7 @@ class _TriggerListState extends State<TriggerList> {
               padding: EdgeInsets.symmetric(vertical: 4), // 위아래 패딩 추가
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white24, // 드래그 중에도 유지할 배경색
+                  color: Colors.grey.shade800, // 드래그 중에도 유지할 배경색
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -49,7 +51,13 @@ class _TriggerListState extends State<TriggerList> {
                           _endJob = value ?? false;
                         });
                       },
-                      checkColor: Colors.cyanAccent,
+                      checkColor: Colors.white,
+                      fillColor: MaterialStateProperty.resolveWith((states) {
+                        if (states.contains(MaterialState.selected)) {
+                          return Colors.cyanAccent;  // 체크박스가 선택되었을 때 내부 색상
+                        }
+                        return Colors.grey.shade500;  // 선택되지 않았을 때 내부 색상
+                      }),
                     ),
                     Text(
                       "${items[index]}",
