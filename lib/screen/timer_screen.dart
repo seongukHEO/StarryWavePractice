@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:starrywave_practice/common/trigger_list.dart';
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({super.key});
@@ -12,10 +13,12 @@ class TimerScreen extends StatefulWidget {
 
 class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin {
   
-  static const maxSecond = 1500; //25분
+  static const maxSecond = 15; //25분
   int remainingSecond = maxSecond;  // 남은 시간
   Timer? _timer;
   bool isRunning = false;
+
+  int fomodoro = 0;
 
   @override
   void dispose() {
@@ -32,6 +35,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
         }  
         else{
           _timer?.cancel();  //시간이 0이되면 타이머 중지
+          fomodoro++;
         }
       });
     });
@@ -63,57 +67,81 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
       backgroundColor: Colors.black12,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(20),
-          margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-          child: Align(
-            alignment: Alignment.center,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("경영시험 공부하기에", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),),
-                Text("일단 딱 25분 만 집중해보아요!",  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18)),
-                SizedBox(height: 50,),
-                Center(
-                  child: SizedBox(
-                    width: 300,
-                    height: 300,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        CircularProgressIndicator(
-                          backgroundColor: Colors.cyanAccent,
-                          strokeWidth: 20,
-                          value: remainingSecond / maxSecond , //점점 줄어들게끔 구현
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("남은 시간", style: TextStyle(fontSize: 20),),
-                              Text(
-                                formatTime(remainingSecond),
-                                style: TextStyle(fontSize: 50, color: Colors.lightGreenAccent),
-                              ),
-                              IconButton(
-                                  onPressed: toggleTimer,
-                                  iconSize: 60,
-                                  icon: Icon(
-                                    isRunning
-                                        ? Icons.pause
-                                        : Icons.play_arrow,
-                                    color: Colors.white,
-                                  ),
-                              )
-                            ],
-                          )
+          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("경영시험 공부하기에", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),),
+              Text("일단 딱 25분 만 집중해보아요!",  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18)),
+              SizedBox(height: 35,),
+              Center(
+                child: SizedBox(
+                  width: 250,
+                  height: 250,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      CircularProgressIndicator(
+                        backgroundColor: Colors.cyanAccent,
+                        strokeWidth: 15,
+                        value: remainingSecond / maxSecond , //점점 줄어들게끔 구현
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("남은 시간", style: TextStyle(fontSize: 20),),
+                            Text(
+                              formatTime(remainingSecond),
+                              style: TextStyle(fontSize: 50, color: Colors.lightGreenAccent),
+                            ),
+                            IconButton(
+                                onPressed: toggleTimer,
+                                iconSize: 60,
+                                icon: Icon(
+                                  isRunning
+                                      ? Icons.pause
+                                      : Icons.play_arrow,
+                                  color: Colors.white,
+                                ),
+                            )
+                          ],
                         )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
+                ),
+              ),
+              SizedBox(height: 40,),
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: Row(
+                  children: [
+                    Text("뽀모도로 횟수 : ${fomodoro}", style: TextStyle(color: Colors.grey),),
+                    SizedBox(width: 15,),
+                    Text("총 집중 시간 : 00:00", style: TextStyle(color: Colors.grey),)
+                  ],
+                ),
+              ),
+              SizedBox(height: 10,),
+              Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    color: Colors.white12,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: [
+                          Text("5분간 시작트리거부터 완료해보아요", style: TextStyle(color: Colors.white),),
+                          SizedBox(height: 10,),
+                          TriggerList(),
+                        ],
+                      ),
+                    ),
+                  )
+              )
+            ],
           ),
         ),
       ),

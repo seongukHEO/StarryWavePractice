@@ -80,8 +80,12 @@ class _BuildChipsState extends State<BuildChips> {
                                   borderSide: BorderSide.none
                               ),
                               onPressed: (){
-                                _addChip(_chipController.text);
-                                Navigator.pop(context);
+                                if (_chipController.text.isNotEmpty) {
+                                  _addChip(_chipController.text);
+                                  Navigator.pop(context);
+                                }  else{
+
+                                }
                               },
                               child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                             ),
