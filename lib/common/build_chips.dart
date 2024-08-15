@@ -25,7 +25,7 @@ class _BuildChipsState extends State<BuildChips> {
               child: Text("경영시험 공부하기의\n새 시작트리거를 추가해보세요", style: TextStyle(fontSize: 16),),
             ),
             content: Container(
-              height: 200,
+              height: 150,
               width: 300,
               padding: EdgeInsets.all(10),
               child: Column(
@@ -44,9 +44,10 @@ class _BuildChipsState extends State<BuildChips> {
                           borderRadius: BorderRadius.circular(15)
                       ),
                       labelText: "시작트리거를 작성하세요!",
+                      labelStyle: TextStyle(fontSize: 14)
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  Spacer(),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [

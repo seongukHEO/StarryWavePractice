@@ -127,6 +127,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                                 onPressed: (){
                                   if (_taskController.text.isNotEmpty) {
                                     Navigator.pop(context);
+                                    print("ddddd : ${_taskController.text}");
                                   }  else{
 
                                   }
@@ -229,7 +230,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                           children: [
                             Text("5분간 시작트리거부터 완료해보아요", style: TextStyle(color: Colors.grey, fontSize: 12),),
                             SizedBox(height: 10,),
-                            TriggerList(),
+                            TriggerList(text : _taskController.text),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

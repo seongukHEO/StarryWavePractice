@@ -4,7 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TriggerList extends StatefulWidget {
-  const TriggerList({super.key});
+
+  final String text;
+
+  const TriggerList({super.key, required this.text});
 
   @override
   State<TriggerList> createState() => _TriggerListState();
@@ -49,6 +52,7 @@ class _TriggerListState extends State<TriggerList> {
                       onChanged: (bool? value) {
                         setState(() {
                           _endJob = value ?? false;
+                          print("dkdk : ${widget.text}");
                         });
                       },
                       checkColor: Colors.white,
