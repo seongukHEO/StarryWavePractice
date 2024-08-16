@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:starrywave_practice/screen/add_job_screen.dart';
 import 'package:starrywave_practice/widget/memo_widget.dart';
 import 'package:starrywave_practice/widget/my_page_widget.dart';
@@ -31,9 +32,7 @@ class _HomeScreenState extends State<HomeScreem> {
         0 => FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context){
-              return AddJobScreen();
-            }));
+            context.go("/addJob");
           },
           child: Icon(Icons.add_circle),
         ),
@@ -41,9 +40,7 @@ class _HomeScreenState extends State<HomeScreem> {
         1 => FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context){
-              return AddJobScreen();
-            }));
+            context.go("/addJob");
           },
           child: Icon(Icons.add_circle),
         ),

@@ -127,7 +127,6 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                                 onPressed: (){
                                   if (_taskController.text.isNotEmpty) {
                                     Navigator.pop(context);
-                                    print("ddddd : ${_taskController.text}");
                                   }  else{
 
                                   }

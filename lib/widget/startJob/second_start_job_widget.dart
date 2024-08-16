@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:starrywave_practice/common/build_chips.dart';
 import 'package:starrywave_practice/screen/timer_screen.dart';
 
@@ -61,9 +62,7 @@ class _SecondStartJobWidgetState extends State<SecondStartJobWidget> {
                                 borderSide: BorderSide.none
                             ),
                             onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return TimerScreen();
-                              }));
+                              context.go("/timer");
                             },
                             child: Text("시작하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                           ),

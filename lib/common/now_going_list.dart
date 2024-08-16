@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:starrywave_practice/screen/modify_todo_screen.dart';
 import 'package:starrywave_practice/screen/todo_start_screen.dart';
 
@@ -24,9 +25,7 @@ class _NowGoingListState extends State<NowGoingList> {
           itemBuilder: (context, index){
             return GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return ModifyTodoScreen();
-                }));
+                context.go("/modifyJob");
               },
               child: Container(
                 margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -61,9 +60,7 @@ class _NowGoingListState extends State<NowGoingList> {
                     Container(
                       child: IconButton(
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return TodoStartScreen();
-                          }));
+                          context.go("/todoStart");
                         },
                         icon: Icon(Icons.play_circle_filled_rounded),
                       ),

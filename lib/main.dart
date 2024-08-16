@@ -1,24 +1,61 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:starrywave_practice/firebase_options.dart';
+import 'package:starrywave_practice/screen/add_job_screen.dart';
 import 'package:starrywave_practice/screen/home_screem.dart';
+import 'package:starrywave_practice/screen/modify_todo_screen.dart';
+import 'package:starrywave_practice/screen/timer_screen.dart';
+import 'package:starrywave_practice/screen/todo_start_screen.dart';
+import 'package:starrywave_practice/widget/memo_widget.dart';
+import 'package:starrywave_practice/widget/my_page_widget.dart';
+import 'package:starrywave_practice/widget/today_todo_widget.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final router = GoRouter(
+    initialLocation: "/",
+      routes: [
+        GoRoute(
+            path: "/",
+          builder: (context, state) => HomeScreem(),
+          routes: [
+            GoRoute(
+                path: "addJob",
+              builder: (context, state) => AddJobScreen()
+            ),
+            GoRoute(
+                path: "todoStart",
+                builder: (context, state) => TodoStartScreen()
+            ),
+            GoRoute(
+                path: "modifyJob",
+                builder: (context, state) => ModifyTodoScreen()
+            ),
+          ]
+        ),
+        GoRoute(
+            path: "/timer",
+          builder: (context, state) => TimerScreen()
+        )
+      ]
+  );
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
+      routerConfig: router,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -38,7 +75,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreem(),
     );
   }
 }

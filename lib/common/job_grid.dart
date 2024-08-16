@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:starrywave_practice/screen/modify_todo_screen.dart';
 import 'package:starrywave_practice/screen/todo_start_screen.dart';
 
@@ -25,9 +26,7 @@ class _JobGridState extends State<JobGrid> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context){
-              return ModifyTodoScreen();
-            }));
+            context.go("/modifyJob");
           },
           child: Container(
             decoration: BoxDecoration(
@@ -57,9 +56,7 @@ class _JobGridState extends State<JobGrid> {
                       ),
                       IconButton(
                           onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return TodoStartScreen();
-                            }));
+                            context.go("/todoStart");
                           },
                           icon: Icon(Icons.play_circle)
                       )
