@@ -133,8 +133,8 @@ class _ThirdJobWidgetState extends State<ThirdJobWidget> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide.none
                             ),
-                            onPressed: (){
-                              print(ref.read(jobInfoProvider));
+                            onPressed: ()async{
+                              await ref.read(addJobFutureProvider(ref.read(jobInfoProvider)));
                               Navigator.pop(context);
                             },
                             child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
