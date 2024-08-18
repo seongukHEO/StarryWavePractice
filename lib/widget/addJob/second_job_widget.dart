@@ -2,8 +2,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:starrywave_practice/common/flex_button.dart';
+import 'package:starrywave_practice/provider/job_provider.dart';
 import 'package:starrywave_practice/widget/calendar_widget.dart';
 
 class SecondJobWidget extends StatefulWidget {
@@ -37,12 +39,17 @@ class _SecondJobWidgetState extends State<SecondJobWidget> {
     showDialog(
         context: context,
         builder: (context){
-          return CalendarWidget(onSave: (String selectTime){
-            setState(() {
-              calendarText = selectTime.toString();
-              print("날짜 ${selectTime}");
-            });
-          });
+          return Consumer(
+            builder: (context, ref, child){
+              return CalendarWidget(onSave: (String selectTime){
+                ref.read(jobInfoProvider.notifier).addDate(selectTime.toString());
+                setState(() {
+                  calendarText = selectTime.toString();
+                  print("날짜 ${selectTime}");
+                });
+              });
+            }
+          );
         }
     );
   }
@@ -53,112 +60,112 @@ class _SecondJobWidgetState extends State<SecondJobWidget> {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("이 일은 언제하면\n좋은 일인가요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
-            SizedBox(height: 10,),
-            Text("경영과제 조사하기는 언제하면\n좋은 일인가요?", style: TextStyle(color: Colors.grey),),
-            SizedBox(height: 50,),
-            GestureDetector(
-              onTap: (){
-
-              },
-              child: GestureDetector(
-                onTap: (){
-                  return selectEvent(1);
-                },
-                child: Container(
-                  height: 40,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: Colors.black),
-                    borderRadius: BorderRadius.circular(25),
-                    color: _firstContainer ? Colors.black : Colors.white
-                  ),
-                  child: Align(
-                    alignment: Alignment.center,
-                      child: Text("아직 모르겠어요",
-                        style: TextStyle(
-                            fontSize: 13,
-                            color: _firstContainer ? Colors.white : Colors.black,
-                            fontWeight: FontWeight.bold),
-                      )
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 50,),
-            Text("예상 가능하다면 날짜나\n마감일이 있다면 선택해보세요.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-            SizedBox(height: 15,),
-            Container(
-              height: 50,
-              padding: EdgeInsets.fromLTRB(15, 0, 10, 0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Colors.grey.shade300
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    _calendarButton ? "${calendarText}" : "",
-                    style: TextStyle(color: Colors.grey),),
-                  IconButton(
-                      onPressed: (){
-                        _showDialog();
-                        return selectEvent(2);
-                      },
-                      icon: Icon(Icons.calendar_today)
-                  )
-                ],
-              ),
-            ),
-        Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+        child: Consumer(
+          builder: (context, ref, child){
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 2,
+                Text("이 일은 언제하면\n좋은 일인가요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
+                SizedBox(height: 10,),
+                Text("경영과제 조사하기는 언제하면\n좋은 일인가요?", style: TextStyle(color: Colors.grey),),
+                SizedBox(height: 50,),
+                GestureDetector(
+                  onTap: (){
+                    ref.read(jobInfoProvider.notifier).addDate("");
+                    return selectEvent(1);
+                  },
                   child: Container(
-                    height: 45,
-                    width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
-                    child: MaterialButton(
-                      shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)
-                      ),
-                      onPressed: (){
-                        widget.tabController.animateTo(0);
-                      },
-                      child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
+                    height: 40,
+                    width: 120,
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 1, color: Colors.black),
+                        borderRadius: BorderRadius.circular(25),
+                        color: _firstContainer ? Colors.black : Colors.white
+                    ),
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: Text("아직 모르겠어요",
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: _firstContainer ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.bold),
+                        )
                     ),
                   ),
                 ),
+                SizedBox(height: 50,),
+                Text("예상 가능하다면 날짜나\n마감일이 있다면 선택해보세요.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+                SizedBox(height: 15,),
+                Container(
+                  height: 50,
+                  padding: EdgeInsets.fromLTRB(15, 0, 10, 0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.grey.shade300
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        _calendarButton ? "${calendarText}" : "",
+                        style: TextStyle(color: Colors.grey),),
+                      IconButton(
+                          onPressed: (){
+                            _showDialog();
+                            return selectEvent(2);
+                          },
+                          icon: Icon(Icons.calendar_today)
+                      )
+                    ],
+                  ),
+                ),
                 Expanded(
-                    flex: 3,
-                    child: Container(
-                      height: 45,
-                      width: double.infinity,
-                      margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
-                      child: MaterialButton(
-                        color: Colors.black,
-                        shape: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide.none
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            height: 45,
+                            width: double.infinity,
+                            margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                            child: MaterialButton(
+                              shape: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
+                              onPressed: (){
+                                widget.tabController.animateTo(0);
+                              },
+                              child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
+                            ),
+                          ),
                         ),
-                        onPressed: (){
-                          widget.tabController.animateTo(2);
-                        },
-                        child: Text("다음", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                      ),
+                        Expanded(
+                            flex: 3,
+                            child: Container(
+                              height: 45,
+                              width: double.infinity,
+                              margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                              child: MaterialButton(
+                                color: Colors.black,
+                                shape: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide.none
+                                ),
+                                onPressed: (){
+                                  widget.tabController.animateTo(2);
+                                },
+                                child: Text("다음", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                              ),
+                            )
+                        )
+                      ],
                     )
-                )
+                ),
               ],
-            )
-        ),
-          ],
-        ),
+            );
+          },
+        )
       ),
     );
   }

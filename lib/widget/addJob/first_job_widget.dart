@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:starrywave_practice/provider/job_provider.dart';
 import 'package:starrywave_practice/widget/addJob/second_job_widget.dart';
 
 class FirstJobWidget extends StatefulWidget {
@@ -16,6 +18,13 @@ class _FirstJobWidgetState extends State<FirstJobWidget> {
 
   TextEditingController emailController = TextEditingController();
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.dispose();
+  }
+
 
 
   @override
@@ -28,22 +37,29 @@ class _FirstJobWidgetState extends State<FirstJobWidget> {
           children: [
             Text("해야하는 일의\n제목을 작성해주세요!", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
             SizedBox(height: 60,),
-            TextFormField(
-              key: _formKey,
-              decoration: InputDecoration(
-                filled: true,
-                  fillColor: Colors.grey.shade300,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
+            Consumer(
+              builder: (context, ref, child){
+                return TextFormField(
+                  key: _formKey,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade300,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(15)
+                    ),
+                    labelText: "할일의 제목을 작성해보세요",
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(15)
-                  ),
-                  labelText: "할일의 제목을 작성해보세요",
-              ),
-              controller: emailController,
+                  controller: emailController,
+                  onChanged: (value){
+                    ref.read(jobInfoProvider.notifier).addTitle(value);
+                  },
+                );
+              },
             ),
             Text("* 20자 이내로 작성해주세요", style: TextStyle(color: Colors.grey.shade400, fontSize: 10),),
             Expanded(

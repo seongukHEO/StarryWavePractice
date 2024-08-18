@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:starrywave_practice/common/flex_button.dart';
+import 'package:starrywave_practice/provider/job_provider.dart';
 
 class ThirdJobWidget extends StatefulWidget {
   final TabController tabController;
@@ -39,60 +41,66 @@ class _ThirdJobWidgetState extends State<ThirdJobWidget> {
             SizedBox(height: 10,),
             Text("경영과제 조사하기는 집중을 많이 해야\n완료 할 수 있는 일인가요?", style: TextStyle(color: Colors.grey),),
             SizedBox(height: 50,),
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: (){
-                    return toggleButtonStyle(1);
-                  },
-                  child: Container(
-                    height: 40,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 1),
-                        borderRadius: BorderRadius.circular(25),
-                        color: isFirstContainer ? Colors.black : Colors.white
+            Consumer(
+              builder: (context, ref, child) {
+                return Row(
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        ref.read(jobInfoProvider.notifier).addFocusState(true);
+                        return toggleButtonStyle(1);
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 1),
+                            borderRadius: BorderRadius.circular(25),
+                            color: isFirstContainer ? Colors.black : Colors.white
+                        ),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "작업집중 회로",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: isFirstContainer ? Colors.white : Colors.black,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            )
+                        ),
+                      ),
                     ),
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "작업집중 회로",
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: isFirstContainer ? Colors.white : Colors.black,
-                              fontWeight: FontWeight.bold
-                          ),
-                        )
+                    SizedBox(width: 10,),
+                    GestureDetector(
+                      onTap: (){
+                        ref.read(jobInfoProvider.notifier).addFocusState(false);
+                        return toggleButtonStyle(2);
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 120,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius: BorderRadius.circular(25),
+                            color: isSecondContainer ? Colors.black : Colors.white
+                        ),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "기본상태 회로",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: isSecondContainer ? Colors.white : Colors.black,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            )
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(width: 10,),
-                GestureDetector(
-                  onTap: (){
-                    return toggleButtonStyle(2);
-                  },
-                  child: Container(
-                    height: 40,
-                    width: 120,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius: BorderRadius.circular(25),
-                        color: isSecondContainer ? Colors.black : Colors.white
-                    ),
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "기본상태 회로",
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: isSecondContainer ? Colors.white : Colors.black,
-                              fontWeight: FontWeight.bold
-                          ),
-                        )
-                    ),
-                  ),
-                ),
-              ],
+                  ],
+                );
+              }
             ),
         Expanded(
             child: Row(
