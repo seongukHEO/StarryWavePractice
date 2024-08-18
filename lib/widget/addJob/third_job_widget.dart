@@ -34,16 +34,16 @@ class _ThirdJobWidgetState extends State<ThirdJobWidget> {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("집중을 많이 요하는\n일인가요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
-            SizedBox(height: 10,),
-            Text("경영과제 조사하기는 집중을 많이 해야\n완료 할 수 있는 일인가요?", style: TextStyle(color: Colors.grey),),
-            SizedBox(height: 50,),
-            Consumer(
-              builder: (context, ref, child) {
-                return Row(
+        child: Consumer(
+          builder: (context, ref, child) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("집중을 많이 요하는\n일인가요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
+                SizedBox(height: 10,),
+                Text("경영과제 조사하기는 집중을 많이 해야\n완료 할 수 있는 일인가요?", style: TextStyle(color: Colors.grey),),
+                SizedBox(height: 50,),
+                Row(
                   children: [
                     GestureDetector(
                       onTap: (){
@@ -99,53 +99,54 @@ class _ThirdJobWidgetState extends State<ThirdJobWidget> {
                       ),
                     ),
                   ],
-                );
-              }
-            ),
-        Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    height: 45,
-                    width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
-                    child: MaterialButton(
-                      shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)
-                      ),
-                      onPressed: (){
-                        widget.tabController.animateTo(1);
-                      },
-                      child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
-                    ),
-                  ),
                 ),
-                Expanded(
-                    flex: 3,
-                    child: Container(
-                      height: 45,
-                      width: double.infinity,
-                      margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
-                      child: MaterialButton(
-                        color: Colors.black,
-                        shape: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide.none
+            Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        height: 45,
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                        child: MaterialButton(
+                          shape: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          onPressed: (){
+                            widget.tabController.animateTo(1);
+                          },
+                          child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
                         ),
-                        onPressed: (){
-                          Navigator.pop(context);
-                        },
-                        child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                       ),
+                    ),
+                    Expanded(
+                        flex: 3,
+                        child: Container(
+                          height: 45,
+                          width: double.infinity,
+                          margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                          child: MaterialButton(
+                            color: Colors.black,
+                            shape: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide.none
+                            ),
+                            onPressed: (){
+                              print(ref.read(jobInfoProvider));
+                              Navigator.pop(context);
+                            },
+                            child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                          ),
+                        )
                     )
+                  ],
                 )
+            ),
               ],
-            )
-        ),
-          ],
+            );
+          }
         ),
       ),
     );

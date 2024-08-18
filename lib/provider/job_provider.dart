@@ -25,7 +25,7 @@ final addJobFutureProvider = FutureProvider.family<void, Job>((ref, job)async{
 
 
 class JobNotifier extends StateNotifier<Job>{
-  JobNotifier() : super(Job(jobIdx: 0, jobTitle: "", startTime: "", focusedState: true))
+  JobNotifier() : super(Job(jobIdx: 0, jobTitle: "", startTime: "", focusedState: true));
 
     //idx
     void addIdx(int index){
