@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:starrywave_practice/model/job.dart';
 
 import '../widget/calendar_widget.dart';
 
 class ModifyTodoScreen extends StatefulWidget {
 
-  final String jobTitle;
-  const ModifyTodoScreen({super.key, required this.jobTitle});
+  final Job job;
+  const ModifyTodoScreen({super.key, required this.job});
 
   @override
   State<ModifyTodoScreen> createState() => _ModifyTodoScreenState();
@@ -63,6 +64,38 @@ class _ModifyTodoScreenState extends State<ModifyTodoScreen> {
         }
     );
   }
+
+  void startScreenFocus(){
+    final jobFocus = widget.job.focusedState;
+    if (jobFocus == true) {
+      _focusState = true;
+      _nomalState = false;
+    }  else if (jobFocus == false) {
+      _focusState = false;
+      _nomalState = true;
+    }
+  }
+  
+  void startScreenDate(){
+    final jobTime = widget.job.startTime;
+    if (jobTime == "") {
+      _noContainer = true;
+      _calendarButton = false;
+    }  else if (jobTime != "") {
+      _noContainer = false;
+      _calendarButton = true;
+      calendarText = jobTime ?? "";
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    startScreenFocus();
+    startScreenDate();
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +125,7 @@ class _ModifyTodoScreenState extends State<ModifyTodoScreen> {
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(25)
                   ),
-                  labelText: "${widget.jobTitle}",
+                  labelText: "${widget.job.jobTitle}",
                 ),
                 controller: modifyController,
               ),

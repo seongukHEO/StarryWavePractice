@@ -31,7 +31,7 @@ class _NowGoingListState extends State<NowGoingList> {
                   itemBuilder: (context, index){
                     return GestureDetector(
                       onTap: (){
-                        context.go("/modifyJob", extra: jobs[index].jobTitle);
+                        context.go("/modifyJob", extra: jobs[index]);
                       },
                       child: Container(
                         margin: EdgeInsets.fromLTRB(0, 8, 0, 0),

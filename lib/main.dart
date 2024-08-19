@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starrywave_practice/firebase_options.dart';
+import 'package:starrywave_practice/model/job.dart';
 import 'package:starrywave_practice/screen/add_job_screen.dart';
 import 'package:starrywave_practice/screen/home_screem.dart';
 import 'package:starrywave_practice/screen/modify_todo_screen.dart';
@@ -40,10 +41,7 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
                 path: "modifyJob",
-                builder: (context, state){
-                  final jobTitle = state.extra as String? ?? "";
-                  return ModifyTodoScreen(jobTitle: jobTitle);
-                }
+                builder: (context, state) => ModifyTodoScreen(job: state.extra as Job)
             ),
           ]
         ),
