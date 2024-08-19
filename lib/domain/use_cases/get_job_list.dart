@@ -11,4 +11,8 @@ class GetJobList {
   Stream<List<Job>> call(){
     return repository.getJob();
   }
+
+  Stream<List<Job>> callFromDate(String date){
+    return repository.getJobForDate(date);
+  }
 }

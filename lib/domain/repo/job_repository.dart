@@ -20,4 +20,9 @@ class JobRepository {
   Stream<List<Job>> getJob(){
     return datasource.getJobs();
   }
+
+  //오늘 날짜에 맞는 데이터 받아오기
+  Stream<List<Job>> getJobForDate(String date){
+    return datasource.getTasksForToday(date);
+  }
 }

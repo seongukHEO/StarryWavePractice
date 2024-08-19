@@ -11,17 +11,19 @@ class FirebaseJobDatasource {
     await firestore.collection("job").add(job.toJson());
   }
 
-
-  //데이터를 받아오는 함수
-  // Future<List<Job>> getJobs()async{
-  //   final snapshot = await firestore.collection('job').get();
-  //   return snapshot.docs.map((doc) => Job.fromJson(doc.data())).toList();
-  // }
-
   Stream<List<Job>> getJobs(){
     return firestore.collection("job").snapshots().map((snapshot){
       return snapshot.docs.map((doc) => Job.fromDocument(doc)).toList();
     });
+  }
+
+  //오늘 날짜에 맞는 데이터 받아오기
+  Stream<List<Job>> getTasksForToday(String todayDate) {
+    return firestore
+        .collection('job')
+        .where('startTime', isEqualTo: todayDate)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => Job.fromDocument(doc)).toList());
   }
 
 }
