@@ -5,7 +5,9 @@ import 'package:intl/intl.dart';
 import '../widget/calendar_widget.dart';
 
 class ModifyTodoScreen extends StatefulWidget {
-  const ModifyTodoScreen({super.key});
+
+  final String jobTitle;
+  const ModifyTodoScreen({super.key, required this.jobTitle});
 
   @override
   State<ModifyTodoScreen> createState() => _ModifyTodoScreenState();
@@ -90,7 +92,7 @@ class _ModifyTodoScreenState extends State<ModifyTodoScreen> {
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(25)
                   ),
-                  labelText: "제목을 수정해주세요",
+                  labelText: "${widget.jobTitle}",
                 ),
                 controller: modifyController,
               ),

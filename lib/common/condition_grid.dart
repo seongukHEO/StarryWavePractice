@@ -26,9 +26,7 @@ class _ConditionGridState extends State<ConditionGrid> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context){
-              return ModifyTodoScreen();
-            }));
+
           },
           child: Container(
             decoration: BoxDecoration(

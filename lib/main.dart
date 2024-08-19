@@ -40,7 +40,10 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
                 path: "modifyJob",
-                builder: (context, state) => ModifyTodoScreen()
+                builder: (context, state){
+                  final jobTitle = state.extra as String? ?? "";
+                  return ModifyTodoScreen(jobTitle: jobTitle);
+                }
             ),
           ]
         ),

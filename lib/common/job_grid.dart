@@ -32,7 +32,7 @@ class _JobGridState extends State<JobGrid> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: (){
-                    context.go("/modifyJob");
+                    context.go("/modifyJob", extra: jobs[index].jobTitle);
                   },
                   child: Container(
                     decoration: BoxDecoration(
