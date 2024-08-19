@@ -6,6 +6,7 @@ class JobRepository {
 
   JobRepository(this.datasource);
 
+  //데이터 저장
   Future<void> addJob(Job job)async{
     final jobInfo = Job(
       jobTitle: job.jobTitle,
@@ -13,5 +14,10 @@ class JobRepository {
       focusedState: job.focusedState,
     );
     await datasource.addJob(jobInfo);
+  }
+
+  //데이터 받아오기
+  Stream<List<Job>> getJob(){
+    return datasource.getJobs();
   }
 }

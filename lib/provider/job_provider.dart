@@ -1,9 +1,10 @@
-import 'dart:ffi';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:starrywave_practice/data/firebase_job_dataSource.dart';
 import 'package:starrywave_practice/domain/repo/job_repository.dart';
+import 'package:starrywave_practice/domain/use_cases/get_job_list.dart';
 import 'package:starrywave_practice/model/job.dart';
 import 'package:starrywave_practice/domain/use_cases/add_job_list.dart';
 
@@ -28,12 +29,12 @@ class JobNotifier extends StateNotifier<Job>{
   JobNotifier() : super(Job(jobTitle: "", startTime: "", focusedState: true));
 
 
-    //제목 업데이트
+    //제목 추가
     void addTitle(String jobTitle){
       state = state.copyWith(jobTitle: jobTitle);
     }
 
-    //날짜 업데이트
+    //날짜 추가
     void addDate(String date){
       state = state.copyWith(startTime: date);
     }
@@ -45,6 +46,16 @@ class JobNotifier extends StateNotifier<Job>{
 
   }
   final jobInfoProvider = StateNotifierProvider<JobNotifier, Job>((ref) => JobNotifier());
+
+  //데이터 받아오기
+  final getJobProvider = Provider((ref){
+    return GetJobList(ref.watch(jobRepositoryProvider));
+  });
+
+
+  final getJobFutureProvider = StreamProvider((ref){
+    return ref.watch(getJobProvider).call();
+  });
 
 
 
