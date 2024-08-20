@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:starrywave_practice/data/firebase_job_dataSource.dart';
 import 'package:starrywave_practice/domain/repo/job_repository.dart';
-import 'package:starrywave_practice/domain/use_cases/get_job_list.dart';
+import 'package:starrywave_practice/domain/use_cases/job/get_job_list.dart';
 import 'package:starrywave_practice/model/job.dart';
-import 'package:starrywave_practice/domain/use_cases/add_job_list.dart';
+import 'package:starrywave_practice/domain/use_cases/job/add_job_list.dart';
 
 final firebaseJobDataSourceProvider = Provider((ref){
   return FirebaseJobDatasource(FirebaseFirestore.instance);

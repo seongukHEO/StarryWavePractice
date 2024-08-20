@@ -2,7 +2,7 @@
 
 import 'package:starrywave_practice/domain/repo/job_repository.dart';
 
-import '../../model/job.dart';
+import '../../../model/job.dart';
 
 class AddJobList{
   final JobRepository repo;
