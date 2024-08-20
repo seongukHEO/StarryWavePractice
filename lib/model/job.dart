@@ -10,6 +10,7 @@ part 'job.g.dart';
 @freezed
 sealed class Job with _$Job{
   factory Job({
+    String? id,
     String? jobTitle,
     String? startTime,
     bool? focusedState,
@@ -18,6 +19,7 @@ sealed class Job with _$Job{
   factory Job.fromDocument(DocumentSnapshot doc){
     final data = doc.data() as Map<String, dynamic>;
     return Job(
+      id: data['id'] ?? "",
       jobTitle: data['jobTitle'] ?? "",
       startTime: data['startTime'] ?? "",
       focusedState: data["focusedState"] ?? true

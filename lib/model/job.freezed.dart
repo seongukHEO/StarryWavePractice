@@ -20,6 +20,7 @@ Job _$JobFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Job {
+  String? get id => throw _privateConstructorUsedError;
   String? get jobTitle => throw _privateConstructorUsedError;
   String? get startTime => throw _privateConstructorUsedError;
   bool? get focusedState => throw _privateConstructorUsedError;
@@ -34,7 +35,8 @@ abstract class $JobCopyWith<$Res> {
   factory $JobCopyWith(Job value, $Res Function(Job) then) =
       _$JobCopyWithImpl<$Res, Job>;
   @useResult
-  $Res call({String? jobTitle, String? startTime, bool? focusedState});
+  $Res call(
+      {String? id, String? jobTitle, String? startTime, bool? focusedState});
 }
 
 /// @nodoc
@@ -49,11 +51,16 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? jobTitle = freezed,
     Object? startTime = freezed,
     Object? focusedState = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       jobTitle: freezed == jobTitle
           ? _value.jobTitle
           : jobTitle // ignore: cast_nullable_to_non_nullable
@@ -76,7 +83,8 @@ abstract class _$$JobImplCopyWith<$Res> implements $JobCopyWith<$Res> {
       __$$JobImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? jobTitle, String? startTime, bool? focusedState});
+  $Res call(
+      {String? id, String? jobTitle, String? startTime, bool? focusedState});
 }
 
 /// @nodoc
@@ -88,11 +96,16 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? jobTitle = freezed,
     Object? startTime = freezed,
     Object? focusedState = freezed,
   }) {
     return _then(_$JobImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       jobTitle: freezed == jobTitle
           ? _value.jobTitle
           : jobTitle // ignore: cast_nullable_to_non_nullable
@@ -112,11 +125,13 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
 /// @nodoc
 @JsonSerializable()
 class _$JobImpl implements _Job {
-  _$JobImpl({this.jobTitle, this.startTime, this.focusedState});
+  _$JobImpl({this.id, this.jobTitle, this.startTime, this.focusedState});
 
   factory _$JobImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobImplFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String? jobTitle;
   @override
@@ -126,7 +141,7 @@ class _$JobImpl implements _Job {
 
   @override
   String toString() {
-    return 'Job(jobTitle: $jobTitle, startTime: $startTime, focusedState: $focusedState)';
+    return 'Job(id: $id, jobTitle: $jobTitle, startTime: $startTime, focusedState: $focusedState)';
   }
 
   @override
@@ -134,6 +149,7 @@ class _$JobImpl implements _Job {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$JobImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.jobTitle, jobTitle) ||
                 other.jobTitle == jobTitle) &&
             (identical(other.startTime, startTime) ||
@@ -145,7 +161,7 @@ class _$JobImpl implements _Job {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, jobTitle, startTime, focusedState);
+      Object.hash(runtimeType, id, jobTitle, startTime, focusedState);
 
   @JsonKey(ignore: true)
   @override
@@ -163,12 +179,15 @@ class _$JobImpl implements _Job {
 
 abstract class _Job implements Job {
   factory _Job(
-      {final String? jobTitle,
+      {final String? id,
+      final String? jobTitle,
       final String? startTime,
       final bool? focusedState}) = _$JobImpl;
 
   factory _Job.fromJson(Map<String, dynamic> json) = _$JobImpl.fromJson;
 
+  @override
+  String? get id;
   @override
   String? get jobTitle;
   @override
