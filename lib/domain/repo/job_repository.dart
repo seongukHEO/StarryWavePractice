@@ -6,16 +6,6 @@ class JobRepository {
 
   JobRepository(this.datasource);
 
-  //데이터 저장
-  // Future<void> addJob(Job job)async{
-  //   final jobInfo = Job(
-  //     jobTitle: job.jobTitle,
-  //     startTime: job.startTime,
-  //     focusedState: job.focusedState,
-  //   );
-  //   await datasource.addJob(jobInfo);
-  // }
-
   Future<void>addJob(Job job)async{
     return datasource.addJob(job);
   }
@@ -28,5 +18,15 @@ class JobRepository {
   //오늘 날짜에 맞는 데이터 받아오기
   Stream<List<Job>> getJobForDate(String date){
     return datasource.getTasksForToday(date);
+  }
+
+  //데이터 변경
+  Future<void> updateJob(String jobId, Job job)async{
+    final jobData = {
+      'jobTitle': job.jobTitle,
+      'startTime' : job.startTime,
+      'focusedState' : job.focusedState,
+    };
+    await datasource.updateJob(jobId, jobData);
   }
 }

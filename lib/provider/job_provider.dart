@@ -59,13 +59,17 @@ class JobNotifier extends StateNotifier<Job>{
 
 
   //오늘 날짜 데이터 받아오기
-  final getJobForTodayProvider = Provider((ref){
-    return GetJobList(ref.watch(jobRepositoryProvider));
+ final todayJobStreamProvider = StreamProvider<List<Job>>((ref){
+    final todayDate = DateTime.now().toIso8601String().split('T').first;
+    return ref.watch(getJobProvider).callFromDate(todayDate);
   });
 
-  final todayJobStreamProvider = StreamProvider<List<Job>>((ref){
-    final todayDate = DateTime.now().toIso8601String().split('T').first;
-    return ref.watch(getJobForTodayProvider).callFromDate(todayDate);
+
+  //데이터 수정
+  final updateJobFutureProvider = FutureProvider.family<void, Map<String, dynamic>>((ref, data)async{
+    final jobId = data['id'] as String;
+    final job = data['job'] as Job;
+    await ref.watch(addJobProvider).callUpdate(jobId, job);
   });
 
 

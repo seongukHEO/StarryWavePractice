@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:starrywave_practice/model/job.dart';
+import 'package:starrywave_practice/provider/job_provider.dart';
 
 import '../widget/calendar_widget.dart';
 
@@ -99,6 +101,7 @@ class _ModifyTodoScreenState extends State<ModifyTodoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('할 일 수정', style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
@@ -231,16 +234,30 @@ class _ModifyTodoScreenState extends State<ModifyTodoScreen> {
                       Container(
                           width: double.infinity,
                           height: 50,
-                          child: MaterialButton(
-                            onPressed: (){
-                              Navigator.pop(context);
-                            },
-                            child: Text("저장", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
-                            color: Colors.black,
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide.none
-                            ),
+                          child: Consumer(
+                            builder: (context, ref, child) {
+                              return MaterialButton(
+                                onPressed: (){
+                                  final updateJob = Job(
+                                    id: widget.job.id,
+                                    jobTitle: modifyController.text,
+                                    startTime: _calendarButton ? calendarText : "",
+                                    focusedState: _focusState ? true : false
+                                  );
+                                  ref.read(updateJobFutureProvider({
+                                    'id' : widget.job.id,
+                                    'job' : updateJob
+                                  }).future);
+                                  Navigator.pop(context);
+                                },
+                                child: Text("저장", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+                                color: Colors.black,
+                                shape: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide.none
+                                ),
+                              );
+                            }
                           )
                       )
                     ],

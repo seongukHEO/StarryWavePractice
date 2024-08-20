@@ -12,4 +12,8 @@ class AddJobList{
   Future<void> call(Job job)async{
     await repo.addJob(job);
   }
+
+  Future<void> callUpdate(String jobId, Job job)async{
+    await repo.updateJob(jobId, job);
+  }
 }

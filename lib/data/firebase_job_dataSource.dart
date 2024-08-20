@@ -11,6 +11,7 @@ class FirebaseJobDatasource {
   //   await firestore.collection("job").add(job.toJson());
   // }
 
+  //데이터 저장 + docId까지
   Future<void>addJob(Job job)async{
     final docRef = firestore.collection('job').doc();
     final jobInfo = job.copyWith(id: docRef.id);
@@ -22,6 +23,13 @@ class FirebaseJobDatasource {
       'focusedState' : jobInfo.focusedState
     });
   }
+
+  //데이터 수정하기
+  Future<void>updateJob(String jobId, Map<String, dynamic> jobData)async{
+    await firestore.collection('job').doc(jobId).update(jobData);
+  }
+
+
   Stream<List<Job>> getJobs(){
     return firestore.collection("job").snapshots().map((snapshot){
       return snapshot.docs.map((doc) => Job.fromDocument(doc)).toList();
