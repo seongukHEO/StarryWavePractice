@@ -7,13 +7,17 @@ class JobRepository {
   JobRepository(this.datasource);
 
   //데이터 저장
-  Future<void> addJob(Job job)async{
-    final jobInfo = Job(
-      jobTitle: job.jobTitle,
-      startTime: job.startTime,
-      focusedState: job.focusedState,
-    );
-    await datasource.addJob(jobInfo);
+  // Future<void> addJob(Job job)async{
+  //   final jobInfo = Job(
+  //     jobTitle: job.jobTitle,
+  //     startTime: job.startTime,
+  //     focusedState: job.focusedState,
+  //   );
+  //   await datasource.addJob(jobInfo);
+  // }
+
+  Future<void>addJob(Job job)async{
+    return datasource.addJob(job);
   }
 
   //데이터 받아오기
