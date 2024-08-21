@@ -40,7 +40,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
           _timer?.cancel();  //시간이 0이되면 타이머 중지
           fomodoro++;
           //여기에 어떠한 이벤트를 추가할 수 있음
-          //_showDialog();
+          _showDialog();
 
         }
       });

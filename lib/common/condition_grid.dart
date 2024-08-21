@@ -57,9 +57,9 @@ class _ConditionGridState extends State<ConditionGrid> {
                       ),
                       IconButton(
                           onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return TodoStartScreen();
-                            }));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context){
+                            //   return TodoStartScreen();
+                            // }));
                           },
                           icon: Icon(Icons.play_circle)
                       )

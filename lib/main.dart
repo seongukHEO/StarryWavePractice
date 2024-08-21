@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
                 path: "todoStart",
-                builder: (context, state) => TodoStartScreen()
+                builder: (context, state) => TodoStartScreen(job: state.extra as Job)
             ),
             GoRoute(
                 path: "modifyJob",

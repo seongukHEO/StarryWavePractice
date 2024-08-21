@@ -1,9 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:starrywave_practice/model/trigger.dart';
+import 'package:starrywave_practice/provider/job_provider.dart';
+import 'package:starrywave_practice/provider/trigger_provider.dart';
+
+import '../model/job.dart';
 
 class BuildChips extends StatefulWidget {
+  final Job job;
   
-  const BuildChips({super.key});
+  const BuildChips({super.key, required this.job});
 
   @override
   State<BuildChips> createState() => _BuildChipsState();
@@ -24,78 +31,88 @@ class _BuildChipsState extends State<BuildChips> {
               alignment: Alignment.center,
               child: Text("경영시험 공부하기의\n새 시작트리거를 추가해보세요", style: TextStyle(fontSize: 16),),
             ),
-            content: Container(
-              height: 150,
-              width: 300,
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: _chipController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade300,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide.none,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15)
-                      ),
-                      labelText: "시작트리거를 작성하세요!",
-                      labelStyle: TextStyle(fontSize: 14)
-                    ),
-                  ),
-                  Spacer(),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+            content: Consumer(
+              builder: (context, ref, child) {
+                return Container(
+                  height: 150,
+                  width: 300,
+                  padding: EdgeInsets.all(10),
+                  child: Column(
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          height: 45,
-                          width: double.infinity,
-                          margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
-                          child: MaterialButton(
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)
-                            ),
-                            onPressed: (){
-                              Navigator.pop(context);
-                            },
-                            child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
+                      TextField(
+                        controller: _chipController,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey.shade300,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide.none,
                           ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          labelText: "시작트리거를 작성하세요!",
+                          labelStyle: TextStyle(fontSize: 14)
                         ),
                       ),
-                      Expanded(
-                          flex: 3,
-                          child: Container(
-                            height: 45,
-                            width: double.infinity,
-                            margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
-                            child: MaterialButton(
-                              color: Colors.black,
-                              shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide.none
-                              ),
-                              onPressed: (){
-                                if (_chipController.text.isNotEmpty) {
-                                  _addChip(_chipController.text);
+                      Spacer(),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              height: 45,
+                              width: double.infinity,
+                              margin: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                              child: MaterialButton(
+                                shape: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15)
+                                ),
+                                onPressed: (){
                                   Navigator.pop(context);
-                                }  else{
-
-                                }
-                              },
-                              child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                },
+                                child: Text("이전", style: TextStyle(fontWeight: FontWeight.bold),),
+                              ),
                             ),
+                          ),
+                          Expanded(
+                              flex: 3,
+                              child: Container(
+                                height: 45,
+                                width: double.infinity,
+                                margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                                child: MaterialButton(
+                                  color: Colors.black,
+                                  shape: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide.none
+                                  ),
+                                  onPressed: (){
+                                    if (_chipController.text.isNotEmpty) {
+                                      final trigger = Trigger(
+                                        jobId: widget.job.id ?? "",
+                                        triggerTitle: _chipController.text,
+                                        triggerClear: false
+                                      );
+                                      ref.read(addTriggerFutureProvider(trigger));
+                                      _addChip(_chipController.text);
+                                      Navigator.pop(context);
+                                    }  else{
+                
+                                    }
+                                  },
+                                  child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                ),
+                              )
                           )
+                        ],
                       )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                );
+              }
             ),
           );
         }

@@ -66,7 +66,7 @@ class _NowGoingListState extends State<NowGoingList> {
                             Container(
                               child: IconButton(
                                 onPressed: (){
-                                  context.go("/todoStart");
+                                  context.go("/todoStart", extra: jobs[index]);
                                 },
                                 icon: Icon(Icons.play_circle_filled_rounded),
                               ),

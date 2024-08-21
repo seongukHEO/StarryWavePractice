@@ -5,9 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:starrywave_practice/common/build_chips.dart';
 import 'package:starrywave_practice/screen/timer_screen.dart';
 
+import '../../model/job.dart';
+
 class SecondStartJobWidget extends StatefulWidget {
   final TabController tabController;
-  const SecondStartJobWidget({super.key, required this.tabController});
+  final Job job;
+  const SecondStartJobWidget({super.key, required this.tabController, required this.job});
 
   @override
   State<SecondStartJobWidget> createState() => _SecondStartJobWidgetState();
@@ -27,7 +30,7 @@ class _SecondStartJobWidgetState extends State<SecondStartJobWidget> {
             SizedBox(height: 10,),
             Text("경영시험 공부하기(을)를 시작하기 위해 5분동안 할 수 있는\n아주 간단한 일은 무엇인가요?", style: TextStyle(fontSize: 12, color: Colors.grey),),
             SizedBox(height: 50,),
-            BuildChips(),
+            BuildChips(job : widget.job),
             Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
