@@ -62,7 +62,7 @@ class _JobGridState extends State<JobGrid> {
                               ),
                               IconButton(
                                   onPressed: (){
-                                    context.go("/todoStart");
+                                    context.go("/todoStart", extra: jobs[index]);
                                   },
                                   icon: Icon(Icons.play_circle)
                               )

@@ -97,6 +97,7 @@ class _BuildChipsState extends State<BuildChips> {
                                         triggerClear: false
                                       );
                                       ref.read(addTriggerFutureProvider(trigger));
+                                      //final chips = ref.watch(getTriggerStreamProvider());
                                       _addChip(_chipController.text);
                                       Navigator.pop(context);
                                     }  else{
