@@ -65,7 +65,7 @@ class _SecondStartJobWidgetState extends State<SecondStartJobWidget> {
                                 borderSide: BorderSide.none
                             ),
                             onPressed: (){
-                              context.go("/timer");
+                              context.go("/timer", extra: widget.job);
                             },
                             child: Text("시작하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                           ),

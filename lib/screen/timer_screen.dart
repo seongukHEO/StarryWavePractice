@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:starrywave_practice/common/trigger_list.dart';
+import 'package:starrywave_practice/model/job.dart';
 
 class TimerScreen extends StatefulWidget {
-  const TimerScreen({super.key});
+  final Job job;
+
+  const TimerScreen({super.key, required this.job});
 
   @override
   State<TimerScreen> createState() => _TimerScreenState();
@@ -232,7 +235,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                           children: [
                             Text("5분간 시작트리거부터 완료해보아요", style: TextStyle(color: Colors.grey, fontSize: 12),),
                             SizedBox(height: 10,),
-                            TriggerList(text : _taskController.text),
+                            TriggerList(text : _taskController.text, job : widget.job),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

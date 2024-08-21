@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         ),
         GoRoute(
             path: "/timer",
-          builder: (context, state) => TimerScreen()
+          builder: (context, state) => TimerScreen(job: state.extra as Job)
         )
       ]
   );

@@ -120,6 +120,13 @@ class _BuildChipsState extends State<BuildChips> {
     );
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _chipController.dispose();
+  }
+
   void _addChip(String label){
     setState(() {
       _chips.add({"label" : label, "isSelected" : false});
