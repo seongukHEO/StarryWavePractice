@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:starrywave_practice/common/trigger_list.dart';
 import 'package:starrywave_practice/model/job.dart';
+import 'package:starrywave_practice/model/trigger.dart';
+import 'package:starrywave_practice/provider/trigger_provider.dart';
 
 class TimerScreen extends StatefulWidget {
   final Job job;
@@ -118,28 +121,38 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                             ),
                           ),
                         ),
-                        Expanded(
-                            flex: 3,
-                            child: Container(
-                              height: 45,
-                              width: double.infinity,
-                              margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
-                              child: MaterialButton(
-                                color: Colors.black,
-                                shape: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide: BorderSide.none
-                                ),
-                                onPressed: (){
-                                  if (_taskController.text.isNotEmpty) {
-                                    Navigator.pop(context);
-                                  }  else{
+                        Consumer(
+                          builder: (context, ref, child) {
+                            return Expanded(
+                                flex: 3,
+                                child: Container(
+                                  height: 45,
+                                  width: double.infinity,
+                                  margin: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                                  child: MaterialButton(
+                                    color: Colors.black,
+                                    shape: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide.none
+                                    ),
+                                    onPressed: (){
+                                      if (_taskController.text.isNotEmpty) {
+                                        final trigger = Trigger(
+                                          jobId: widget.job.id ?? "",
+                                          triggerTitle: _taskController.text,
+                                          triggerClear: false
+                                        );
+                                        ref.watch(addTriggerFutureProvider(trigger));
+                                        Navigator.pop(context);
+                                      }  else{
 
-                                  }
-                                },
-                                child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                              ),
-                            )
+                                      }
+                                    },
+                                    child: Text("추가하기", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                  ),
+                                )
+                            );
+                          }
                         )
                       ],
                     )
