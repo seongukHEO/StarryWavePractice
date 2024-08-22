@@ -268,7 +268,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("남은 시간", style: TextStyle(fontSize: 20),),
+                            Text("남은 시간", style: TextStyle(fontSize: 20, color: Colors.white),),
                             Text(
                               formatTime(remainingSecond),
                               style: TextStyle(fontSize: 50, color: Colors.lightGreenAccent),
