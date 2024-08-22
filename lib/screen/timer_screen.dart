@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:starrywave_practice/common/trigger_list.dart';
 import 'package:starrywave_practice/model/job.dart';
 import 'package:starrywave_practice/model/trigger.dart';
@@ -25,6 +26,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
   bool isRunning = false;
 
   int fomodoro = 0;
+  int totalTime = 0;
 
   TextEditingController _taskController = TextEditingController();
 
@@ -45,13 +47,77 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
         else{
           _timer?.cancel();  //시간이 0이되면 타이머 중지
           fomodoro++;
+          totalTime += maxSecond;
           //여기에 어떠한 이벤트를 추가할 수 있음
-          _showDialog();
+          _endTimeDialog();
 
         }
       });
     });
   }
+
+  void _endTimeDialog()async{
+    showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            title: Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: 120,
+                width: 300,
+                child: Column(
+                  children: [
+                    Text("정말 ${widget.job.jobTitle}을\n모두 완료 하셨나요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+                    Spacer(),
+                    Container(
+                      width: double.infinity,
+                      child: Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(child: Container(
+                              height: 40,
+                              margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                              child: MaterialButton(
+                                shape: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                                ),
+                                  onPressed: (){
+                                    Navigator.pop(context);
+                                    remainingSecond == maxSecond;
+                                  },
+                                  child: Text("아니요", style: TextStyle(fontWeight: FontWeight.bold),),
+
+                              ),
+                            ),),
+                            Expanded(child: Container(
+                              height: 40,
+                              margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              child: MaterialButton(
+                                color: Colors.black,
+                                shape: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                                ),
+                                  onPressed: (){
+                                    context.go('/');
+                                  },
+                                  child: Text("네, 완료!", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
+                              ),
+                            ),)
+
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          );
+        }
+    );
+  }
+
   
   void toggleTimer(){
     if (isRunning) {
@@ -78,7 +144,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                 width: 300,
                 child: Column(
                   children: [
-                    Text("경영시험 공부하기의", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    Text("${widget.job.jobTitle}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                     Text("하위 테스크를 추가해보세요", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                     SizedBox(height: 20,),
                     TextField(
@@ -182,7 +248,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("경영시험 공부하기에", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),),
+              Text("${widget.job.jobTitle}에", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),),
               Text("일단 딱 25분 만 집중해보아요!",  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18)),
               SizedBox(height: 35,),
               Center(
@@ -231,7 +297,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                   children: [
                     Text("뽀모도로 횟수 : ${fomodoro}", style: TextStyle(color: Colors.grey),),
                     SizedBox(width: 15,),
-                    Text("총 집중 시간 : 00:00", style: TextStyle(color: Colors.grey),)
+                    Text("총 집중 시간 : ${formatTime(totalTime)}분", style: TextStyle(color: Colors.grey),)
                   ],
                 ),
               ),
