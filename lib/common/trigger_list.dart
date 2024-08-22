@@ -41,10 +41,11 @@ class _TriggerListState extends State<TriggerList> {
                       if (newIndex > oldIndex) {
                         newIndex -= 1;
                       }
-                      final String item = data.removeAt(oldIndex) as String;
-                      data.insert(newIndex, item as Trigger);
+                      final Trigger item = data.removeAt(oldIndex); // Trigger 타입으로 처리
+                      data.insert(newIndex, item); // 다시 Trigger 타입으로 삽입
                     });
                   },
+
                   itemBuilder: (context, index) {
                     return Container(
                       key: ValueKey(data[index].triggerTitle), // 고유 키 설정
