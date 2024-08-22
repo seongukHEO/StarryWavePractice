@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'task.dart';
+part of 'taskModel.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Task _$TaskFromJson(Map<String, dynamic> json) {
-  return _Task.fromJson(json);
+TaskModel _$TaskModelFromJson(Map<String, dynamic> json) {
+  return _TaskModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Task {
+mixin _$TaskModel {
   String? get jobId => throw _privateConstructorUsedError;
   int? get fomodoroIdx => throw _privateConstructorUsedError;
   int? get totalTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
+  $TaskModelCopyWith<TaskModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TaskCopyWith<$Res> {
-  factory $TaskCopyWith(Task value, $Res Function(Task) then) =
-      _$TaskCopyWithImpl<$Res, Task>;
+abstract class $TaskModelCopyWith<$Res> {
+  factory $TaskModelCopyWith(TaskModel value, $Res Function(TaskModel) then) =
+      _$TaskModelCopyWithImpl<$Res, TaskModel>;
   @useResult
   $Res call({String? jobId, int? fomodoroIdx, int? totalTime});
 }
 
 /// @nodoc
-class _$TaskCopyWithImpl<$Res, $Val extends Task>
-    implements $TaskCopyWith<$Res> {
-  _$TaskCopyWithImpl(this._value, this._then);
+class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
+    implements $TaskModelCopyWith<$Res> {
+  _$TaskModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -72,20 +73,22 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
 }
 
 /// @nodoc
-abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
-  factory _$$TaskImplCopyWith(
-          _$TaskImpl value, $Res Function(_$TaskImpl) then) =
-      __$$TaskImplCopyWithImpl<$Res>;
+abstract class _$$TaskModelImplCopyWith<$Res>
+    implements $TaskModelCopyWith<$Res> {
+  factory _$$TaskModelImplCopyWith(
+          _$TaskModelImpl value, $Res Function(_$TaskModelImpl) then) =
+      __$$TaskModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? jobId, int? fomodoroIdx, int? totalTime});
 }
 
 /// @nodoc
-class __$$TaskImplCopyWithImpl<$Res>
-    extends _$TaskCopyWithImpl<$Res, _$TaskImpl>
-    implements _$$TaskImplCopyWith<$Res> {
-  __$$TaskImplCopyWithImpl(_$TaskImpl _value, $Res Function(_$TaskImpl) _then)
+class __$$TaskModelImplCopyWithImpl<$Res>
+    extends _$TaskModelCopyWithImpl<$Res, _$TaskModelImpl>
+    implements _$$TaskModelImplCopyWith<$Res> {
+  __$$TaskModelImplCopyWithImpl(
+      _$TaskModelImpl _value, $Res Function(_$TaskModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +98,7 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? fomodoroIdx = freezed,
     Object? totalTime = freezed,
   }) {
-    return _then(_$TaskImpl(
+    return _then(_$TaskModelImpl(
       jobId: freezed == jobId
           ? _value.jobId
           : jobId // ignore: cast_nullable_to_non_nullable
@@ -114,11 +117,11 @@ class __$$TaskImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TaskImpl implements _Task {
-  _$TaskImpl({this.jobId, this.fomodoroIdx, this.totalTime});
+class _$TaskModelImpl implements _TaskModel {
+  _$TaskModelImpl({this.jobId, this.fomodoroIdx, this.totalTime});
 
-  factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TaskImplFromJson(json);
+  factory _$TaskModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TaskModelImplFromJson(json);
 
   @override
   final String? jobId;
@@ -129,14 +132,14 @@ class _$TaskImpl implements _Task {
 
   @override
   String toString() {
-    return 'Task(jobId: $jobId, fomodoroIdx: $fomodoroIdx, totalTime: $totalTime)';
+    return 'TaskModel(jobId: $jobId, fomodoroIdx: $fomodoroIdx, totalTime: $totalTime)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskImpl &&
+            other is _$TaskModelImpl &&
             (identical(other.jobId, jobId) || other.jobId == jobId) &&
             (identical(other.fomodoroIdx, fomodoroIdx) ||
                 other.fomodoroIdx == fomodoroIdx) &&
@@ -151,24 +154,25 @@ class _$TaskImpl implements _Task {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>
-      __$$TaskImplCopyWithImpl<_$TaskImpl>(this, _$identity);
+  _$$TaskModelImplCopyWith<_$TaskModelImpl> get copyWith =>
+      __$$TaskModelImplCopyWithImpl<_$TaskModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TaskImplToJson(
+    return _$$TaskModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _Task implements Task {
-  factory _Task(
+abstract class _TaskModel implements TaskModel {
+  factory _TaskModel(
       {final String? jobId,
       final int? fomodoroIdx,
-      final int? totalTime}) = _$TaskImpl;
+      final int? totalTime}) = _$TaskModelImpl;
 
-  factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
+  factory _TaskModel.fromJson(Map<String, dynamic> json) =
+      _$TaskModelImpl.fromJson;
 
   @override
   String? get jobId;
@@ -178,6 +182,6 @@ abstract class _Task implements Task {
   int? get totalTime;
   @override
   @JsonKey(ignore: true)
-  _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>
+  _$$TaskModelImplCopyWith<_$TaskModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

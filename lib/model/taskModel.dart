@@ -2,25 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'task.freezed.dart';
-part 'task.g.dart';
+part 'taskModel.freezed.dart';
+part 'taskModel.g.dart';
 @freezed
-sealed class Task with _$Task{
-  factory Task({
+sealed class TaskModel with _$TaskModel{
+  factory TaskModel({
   String? jobId,
   int? fomodoroIdx,
   int? totalTime
 
-}) = _Task;
+}) = _TaskModel;
 
-  factory Task.fromDocument(DocumentSnapshot doc){
+  factory TaskModel.fromDocument(DocumentSnapshot doc){
     final data = doc.data() as Map<String, dynamic>;
-    return Task(
+    return TaskModel(
       jobId: data['jobId'] ?? "",
       fomodoroIdx: data['fomodoroIdx'] ?? 0,
       totalTime: data['totalTime'] ?? 0
     );
   }
 
-  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+  factory TaskModel.fromJson(Map<String, dynamic> json) => _$TaskModelFromJson(json);
 }
