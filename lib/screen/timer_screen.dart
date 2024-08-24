@@ -20,7 +20,7 @@ class TimerScreen extends StatefulWidget {
 
 class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin {
   
-  static const maxSecond = 15; //25분
+  static const maxSecond = 5; //25분
   int remainingSecond = maxSecond;  // 남은 시간
   Timer? _timer;
   bool isRunning = false;
@@ -64,51 +64,82 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
             title: Align(
               alignment: Alignment.center,
               child: Container(
-                height: 120,
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                height: 300,
                 width: 300,
                 child: Column(
                   children: [
-                    Text("정말 ${widget.job.jobTitle}을\n모두 완료 하셨나요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-                    Spacer(),
-                    Container(
-                      width: double.infinity,
-                      child: Expanded(
-                        child: Row(
+                    Text("이 일을 언제 다시 시작할까요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+                    SizedBox(height: 30,),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
                           children: [
-                            Expanded(child: Container(
-                              height: 40,
-                              margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                              child: MaterialButton(
-                                shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)
-                                ),
-                                  onPressed: (){
-                                    Navigator.pop(context);
-                                    remainingSecond == maxSecond;
-                                  },
-                                  child: Text("아니요", style: TextStyle(fontWeight: FontWeight.bold),),
-
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.orangeAccent,
+                              child: IconButton(
+                                onPressed: (){},
+                                icon: Icon(Icons.pause, color: Colors.white,),
                               ),
-                            ),),
-                            Expanded(child: Container(
-                              height: 40,
-                              margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                              child: MaterialButton(
-                                color: Colors.black,
-                                shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)
-                                ),
-                                  onPressed: (){
-                                    context.go('/');
-                                  },
-                                  child: Text("네, 완료!", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
-                              ),
-                            ),)
-
+                            ),
+                            SizedBox(height: 8,),
+                            Text("나중에 하기", style: TextStyle(fontSize: 12),)
                           ],
                         ),
-                      ),
-                    )
+                        Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.blueAccent,
+                              child: IconButton(
+                                onPressed: (){},
+                                icon: Icon(Icons.timer, color: Colors.white,),
+                              ),
+                            ),
+                            SizedBox(height: 8,),
+                            Text("5분 휴식 후", style: TextStyle(fontSize: 12),)
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 25,),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.green,
+                              child: IconButton(
+                                onPressed: (){},
+                                icon: Icon(Icons.task_sharp, color: Colors.white,),
+                              ),
+                            ),
+                            SizedBox(height: 8,),
+                            Text("할 일 완료", style: TextStyle(fontSize: 12),)
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.cyanAccent,
+                              child: IconButton(
+                                onPressed: (){},
+                                icon: Icon(Icons.play_arrow, color: Colors.white,),
+                              ),
+                            ),
+                            SizedBox(height: 8,),
+                            Text("바로 시작", style: TextStyle(fontSize: 12),)
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
