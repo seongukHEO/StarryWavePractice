@@ -59,6 +59,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
   void _endTimeDialog()async{
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context){
           return AlertDialog(
             title: Align(
@@ -69,7 +70,7 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                 width: 300,
                 child: Column(
                   children: [
-                    Text("이 일을 언제 다시 시작할까요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+                    Text("이 일을 언제 다시 시작할까요?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
                     SizedBox(height: 30,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,11 +150,88 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
     );
   }
 
+  void _pauseDialog()async{
+    return showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context){
+      return AlertDialog(
+        title: Align(
+          alignment: Alignment.center,
+          child: Container(
+            height: 200,
+            width: 300,
+            child: Column(
+              children: [
+                SizedBox(height: 20,),
+                Text("잠시 정지했어요", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.redAccent,
+                          child: IconButton(
+                            onPressed: (){
+                              context.go("/");
+                            },
+                            icon: Icon(Icons.pause, color: Colors.white,),
+                          ),
+                        ),
+                        SizedBox(height: 8,),
+                        Text("그만두기", style: TextStyle(fontSize: 12),)
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.green.shade300,
+                          child: IconButton(
+                            onPressed: (){
+                              context.go("/");
+                            },
+                            icon: Icon(Icons.task_sharp, color: Colors.white,),
+                          ),
+                        ),
+                        SizedBox(height: 8,),
+                        Text("할 일 완료", style: TextStyle(fontSize: 12),)
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.cyanAccent,
+                          child: IconButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(Icons.play_arrow, color: Colors.white,),
+                          ),
+                        ),
+                        SizedBox(height: 8,),
+                        Text("집중하기", style: TextStyle(fontSize: 12),)
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        )
+      );
+    });
+  }
+
   
   void toggleTimer(){
     if (isRunning) {
       //타이머를 일시 정지
       _timer?.cancel();
+      _pauseDialog();
     }  else{
       //재시작
       startTimer();
