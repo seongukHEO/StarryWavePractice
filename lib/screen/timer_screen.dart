@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:starrywave_practice/common/clear_job_dialog.dart';
 import 'package:starrywave_practice/common/trigger_list.dart';
 import 'package:starrywave_practice/model/job.dart';
 import 'package:starrywave_practice/model/trigger.dart';
@@ -51,12 +52,15 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
           remainingSecond = 5;
           isRunning = false;
           //여기에 어떠한 이벤트를 추가할 수 있음
-          _endTimeDialog();
+          //  _endTimeDialog();
+          clearJobDialog(context);
 
         }
       });
     });
   }
+
+
 
   void _endTimeDialog()async{
     showDialog(
