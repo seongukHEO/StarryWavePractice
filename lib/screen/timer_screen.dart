@@ -48,6 +48,8 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
           _timer?.cancel();  //시간이 0이되면 타이머 중지
           fomodoro++;
           totalTime += maxSecond;
+          remainingSecond = 5;
+          isRunning = false;
           //여기에 어떠한 이벤트를 추가할 수 있음
           _endTimeDialog();
 
@@ -82,7 +84,9 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                               radius: 30,
                               backgroundColor: Colors.orangeAccent,
                               child: IconButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  context.go("/");
+                                },
                                 icon: Icon(Icons.pause, color: Colors.white,),
                               ),
                             ),
@@ -117,7 +121,9 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                               radius: 30,
                               backgroundColor: Colors.green,
                               child: IconButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  context.go("/");
+                                },
                                 icon: Icon(Icons.task_sharp, color: Colors.white,),
                               ),
                             ),
@@ -131,7 +137,9 @@ class _TimerScreenState extends State<TimerScreen> with TickerProviderStateMixin
                               radius: 30,
                               backgroundColor: Colors.cyanAccent,
                               child: IconButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
                                 icon: Icon(Icons.play_arrow, color: Colors.white,),
                               ),
                             ),
