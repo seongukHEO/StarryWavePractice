@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
+  import 'package:intl/intl.dart';
 import 'package:starrywave_practice/common/flex_button.dart';
 import 'package:starrywave_practice/provider/job_provider.dart';
 import 'package:starrywave_practice/widget/calendar_widget.dart';

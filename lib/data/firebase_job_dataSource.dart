@@ -30,6 +30,7 @@ class FirebaseJobDatasource {
   }
 
 
+  //데이터 받아오기
   Stream<List<Job>> getJobs(){
     return firestore.collection("job").snapshots().map((snapshot){
       return snapshot.docs.map((doc) => Job.fromDocument(doc)).toList();

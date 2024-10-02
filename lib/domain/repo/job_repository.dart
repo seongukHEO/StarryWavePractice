@@ -6,6 +6,7 @@ class JobRepository {
 
   JobRepository(this.datasource);
 
+  //데이터 저장하기
   Future<void>addJob(Job job)async{
     return datasource.addJob(job);
   }

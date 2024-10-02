@@ -13,7 +13,7 @@ class TriggerRepository {
       triggerTitle: trigger.triggerTitle,
       triggerClear: trigger.triggerClear
     );
-    await datasource.addTrigger(trigger);
+    await datasource.addTrigger(triggerModel);
   }
 
   //데이터 가져오기

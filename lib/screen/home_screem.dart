@@ -6,6 +6,8 @@ import 'package:starrywave_practice/widget/memo_widget.dart';
 import 'package:starrywave_practice/widget/my_page_widget.dart';
 import 'package:starrywave_practice/widget/today_todo_widget.dart';
 
+import '../common/clear_job_dialog.dart';
+
 class HomeScreem extends StatefulWidget {
   const HomeScreem({super.key});
 
@@ -32,7 +34,8 @@ class _HomeScreenState extends State<HomeScreem> {
         0 => FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: (){
-            context.go("/addJob");
+            // context.go("/addJob");
+            clearJobDialog(context);
           },
           child: Icon(Icons.add_circle),
         ),
